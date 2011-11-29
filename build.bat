@@ -1,0 +1,1 @@
+closurebuilder.py --root=third_party/closure-library/ --root=js/ --namespace="energy.zombie" --compiler_flags="--compilation_level=ADVANCED_OPTIMIZATIONS" --compiler_jar=third_party/compiler.jar --output_mode=compiled > zombie.js

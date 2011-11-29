@@ -1,0 +1,19 @@
+{
+  "name": "Hit the Zombie",
+  "description": "Zombie shooter",
+  "version": "1.0.1",
+  "app": {
+    "urls": [
+      "http://energy.jelastic.com/zombie/"
+    ],
+    "launch": {
+      "web_url": "http://energy.jelastic.com/zombie/"
+    }
+  },
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "permissions": [
+    "unlimitedStorage"
+  ]
+}

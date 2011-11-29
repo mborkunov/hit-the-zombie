@@ -1,0 +1,18 @@
+CACHE MANIFEST
+
+CACHE:
+favicon.ico
+zombie.js
+styles/styles.css
+images/cemetery-2.png
+images/cross.png
+images/bg.png
+images/alpha.png
+images/draft.png
+images/target.png
+images/zombie-1.png
+images/zombie-2.png
+images/zombie-3.png
+
+NETWORK:
+*

@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+#author {
+  color: #fff;
+  display: block;
+  width: 110px;
+  padding-left: 3px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.addthis_toolbox {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 0;
+}
+
+body {
+  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
+  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
+  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -o-linear-gradient(#012212, #000600);
+  overflow: hidden;
+
+  #game-container {
+    border: 1px solid #222;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 0 10px #000;
+    -moz-box-shadow: 0 0 10px #000;
+    -webkit-box-shadow: 0 0 10px #000;
+    overflow: hidden;
+
+    position: absolute;
+    width: 800px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -400px;
+    background: #666 url('../images/cemetery-2.png') no-repeat;
+
+    #overlay {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, .4);
+    }
+
+    #score {
+      font-size: 100px;
+      font-weight: bold;
+      color: yellow;
+      text-align: center;
+      text-shadow: black 0px 0px 10px;
+      z-index: 9;
+    }
+    #timer {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 100px;
+      font-weight: bold;
+      color: yellow;
+      text-align: center;
+      text-shadow: black 0px 0px 10px;
+      z-index: 9;
+    }
+    #start {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 50px;
+      margin: -25px 0 0 -100px;
+      z-index: 11;
+      border: 5px solid rgba(0, 0, 0, .5);
+      border-radius: 25px;
+      font-size: 30px;
+      font-weight: bold;
+      background: rgba(255, 255, 255, .8);
+      -webkit-box-shadow: 0 0 10px  black;
+      cursor: pointer;
+      text-align: center;
+      &:hover {
+        background: rgba(255, 255, 255, .9);
+      }
+      &:active {
+        width: 190px;
+        height: 44px;
+        font-size: 25px;
+        margin: -22px 0 0 -95px;
+      }
+    }
+
+    .target-container {
+      position: absolute;
+      z-index: 1;
+      .target {
+        width: 100px;
+        height: 100px;
+        border: 2px solid #000;
+        border-radius: 50px;
+        background: #fff;
+        cursor: pointer;
+        &.front {
+          background: #fff url('../images/target.png') 0 0 no-repeat;
+        }
+        &.zombie {
+          &.zombie-1 {
+            background: #fff url('../images/zombie-1.png') 25px 10px no-repeat;
+            &.zombie-dead {
+              background: url('../images/cross.png') 10px 10px no-repeat, #fff url('../images/zombie-1.png') 25px 10px no-repeat;
+            }
+          }
+          &.zombie-2 {
+            background: #fff url('../images/zombie-2.png') 15px 10px no-repeat;
+            &.zombie-dead {
+              background: url('../images/cross.png') 10px 10px no-repeat, #fff url('../images/zombie-2.png') 15px 10px no-repeat;
+            }
+          }
+          &.zombie-3 {
+            background: #fff url('../images/zombie-3.png') 15px 10px no-repeat;
+            &.zombie-dead {
+              background: url('../images/cross.png') 10px 10px no-repeat, #fff url('../images/zombie-3.png') 15px 10px no-repeat;
+            }
+          }
+        }
+      }
+    }
+  }
+}
