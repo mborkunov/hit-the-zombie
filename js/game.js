@@ -115,7 +115,7 @@ energy.zombie.Game.prototype.update = function() {
           return;
         }
         if (Math.random() < probability) {
-          target.rotate(Math.round(Math.random() * 5), 15, 'zombie');
+          target.rotate(Math.round(Math.random() * 5));
         }
       }, this);
     }
@@ -133,7 +133,7 @@ energy.zombie.Game.prototype.update = function() {
     } else {
       goog.array.forEach(active, function(target) {
         if (!target.isRotating()) {
-          target.rotate(1, 0, null);
+          target.rotate(1);
         }
       }, this);
     }
@@ -163,12 +163,18 @@ energy.zombie.Game.prototype.getProgress = function() {
   return Math.round(timeLeft * 100 / this.roundTime);
 };
 
+/**
+ * @return {goog.array.ArrayLike}
+ */
 energy.zombie.Game.prototype.getSleepTargets = function() {
   return goog.array.filter(this.targets, function(target) {
     return !target.isRotating();
   });
 };
 
+/**
+ * @return {goog.array.ArrayLike}
+ */
 energy.zombie.Game.prototype.getActiveTargets = function() {
   return goog.array.filter(this.targets, function(target) {
     return target.isRotating() || !target.front;
@@ -180,8 +186,12 @@ energy.zombie.Game.prototype.startListener = function() {
   goog.style.setStyle(this.overlay, 'display', 'none');
 
   this.start();
+  return false;
 };
 
+/**
+ * Application entry point
+ */
 window.onload = function() {
   new energy.zombie.Game();
 

@@ -45,11 +45,6 @@ energy.zombie.Target.prototype.stopTime = 0;
 /**
  * @type {number}
  */
-energy.zombie.Target.prototype.speed = 0;
-
-/**
- * @type {number}
- */
 energy.zombie.Target.prototype.currentTurn = 0;
 
 /**
@@ -135,12 +130,10 @@ energy.zombie.Target.prototype.isRotating = function() {
   return this.rotating;
 };
 
-energy.zombie.Target.prototype.rotate = function(turns, speed, target) {
+energy.zombie.Target.prototype.rotate = function(turns) {
   this.rotating = true;
   this.turns = turns;
   this.currentTurn = 0;
-  this.speed = speed;
-  this.target = this.turns % 2 != 0 ? target : null;
   goog.style.setStyle(this.targetElement, 'background-color', '#fff');
 };
 
