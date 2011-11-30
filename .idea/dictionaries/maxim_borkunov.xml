@@ -2,6 +2,8 @@
   <dictionary name="maxim.borkunov">
     <words>
       <w>closurebuilder</w>
+      <w>highscore</w>
+      <w>viewport</w>
     </words>
   </dictionary>
 </component>

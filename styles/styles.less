@@ -49,6 +49,14 @@ body {
     margin: -300px 0 0 -400px;
     background: #666 url('../images/cemetery-2.png') no-repeat;
 
+    &.ipad {
+      width: 1024px;
+      height: 768px;
+      top: 0;
+      left: 0;
+      margin: 0;
+    }
+
     #overlay {
       position: absolute;
       z-index: 10;
@@ -66,6 +74,17 @@ body {
       text-align: center;
       text-shadow: black 0px 0px 10px;
       z-index: 9;
+    }
+    #highscore {
+      font-size: 40px;
+      font-weight: bold;
+      color: yellow;
+      text-align: left;
+      text-shadow: black 0px 0px 10px;
+      z-index: 9;
+      position: absolute;
+      top: 5px;
+      left: 15px;
     }
     #timer {
       position: absolute;

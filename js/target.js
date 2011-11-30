@@ -120,7 +120,13 @@ energy.zombie.Target.prototype.draw = function(container) {
   goog.dom.classes.add(this.targetElement, 'front');
   goog.dom.appendChild(container, this.targetElement);
 
+  //goog.events.listen(container, goog.events.EventType.TOUCHSTART, this.listener, true, this);
   goog.events.listen(container, goog.events.EventType.MOUSEDOWN, this.listener, true, this);
+  /*if (goog.userAgent.MOBILE) {
+    goog.events.listen(container, goog.events.EventType.MOUSEDOWN, this.listener, true, this);
+  } else {
+    goog.events.listen(container, goog.events.EventType.TOUCHSTART, this.listener, true, this);
+  }*/
 };
 
 /**

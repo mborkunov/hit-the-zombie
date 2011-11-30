@@ -25,6 +25,11 @@ energy.zombie.Game = function() {
   this.overlay = goog.dom.getElement('overlay');
   this.timerElement = goog.dom.getElement('timer');
   goog.events.listen(this.startButton, goog.events.EventType.CLICK, this.startListener, true, this);
+
+  if (localStorage.getItem('highscore')) {
+    this.highscore = parseInt(localStorage.getItem('highscore'));
+    this.showHighScore(this.highscore);
+  }
 };
 
 /**
@@ -41,6 +46,11 @@ energy.zombie.Game.prototype.roundTime = 60;
  * @type {number}
  */
 energy.zombie.Game.prototype.score = 0;
+
+/**
+ * @type {number}
+ */
+energy.zombie.Game.prototype.highscore = 0;
 
 /**
  * @type {number}
@@ -85,6 +95,9 @@ energy.zombie.Game.prototype.stop = function() {
   goog.style.setStyle(this.startButton, 'display', 'block');
   goog.style.setStyle(this.overlay, 'display', 'block');
   goog.dom.setTextContent(this.timerElement, '');
+  if (this.score > this.highscore) {
+    this.setHighScore(this.score);
+  }
 };
 
 energy.zombie.Game.prototype.draw = function() {
@@ -189,6 +202,17 @@ energy.zombie.Game.prototype.startListener = function() {
   return false;
 };
 
+energy.zombie.Game.prototype.setHighScore = function(newHighscore) {
+  this.highscore = newHighscore;
+  localStorage.setItem('highscore', this.highscore);
+  this.showHighScore(this.highscore);
+};
+
+energy.zombie.Game.prototype.showHighScore = function(highscore) {
+  var highScoreElement = goog.dom.getElement('highscore');
+  goog.dom.setTextContent(highScoreElement, 'High score: ' + this.highscore);
+};
+
 /**
  * Application entry point
  */
@@ -198,4 +222,7 @@ window.onload = function() {
   function fail() {return false;}
   document.oncontextmenu = fail;
   document.onmousedown = fail;
+  document.ontouchmove = function(e){
+     e.preventDefault();
+  }
 };

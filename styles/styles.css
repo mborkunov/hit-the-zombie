@@ -70,6 +70,18 @@ body #game-container #score {
   z-index: 9;
 }
 
+body #game-container #highscore {
+  font-size: 40px;
+  font-weight: bold;
+  color: yellow;
+  text-align: left;
+  text-shadow: black 0px 0px 10px;
+  z-index: 9;
+  position: absolute;
+  top: 5px;
+  left: 15px;
+}
+
 body #game-container #timer {
   position: absolute;
   top: 10px;
