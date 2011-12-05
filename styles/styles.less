@@ -27,10 +27,46 @@ html, body {
 }
 
 body {
-  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
-  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
-  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -o-linear-gradient(#012212, #000600);
+  &.webkit {
+    background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
+  }
+  &.firefox {
+    background: url('../images/alpha.png') center center no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
+  }
+  &.opera {
+    background: url('../images/alpha.png') center center 0 no-repeat,  url('../images/bg.png'), -o-linear-gradient(#012212, #000600);
+  }
   overflow: hidden;
+
+  &.ipad {
+    div, button {
+      box-shadow: none !important;
+      text-shadow: none !important;
+      -webkit-box-shadow: none !important;
+    }
+    #game-container {
+      width: 1024px !important;
+      height: 768px !important;
+      top: 0;
+      left: 0;
+      margin: 0;
+    }
+  }
+  &.android {
+    div, button {
+      box-shadow: none !important;
+      text-shadow: none !important;
+      -webkit-box-shadow: none !important;
+    }
+    #game-container {
+      width: 100% !important;
+      height: 100% !important;
+      position: relative;
+      top: 0;
+      left: 0;
+      margin: 0;
+    }
+  }
 
   #game-container {
     border: 1px solid #222;
@@ -39,6 +75,7 @@ body {
     box-shadow: 0 0 10px #000;
     -moz-box-shadow: 0 0 10px #000;
     -webkit-box-shadow: 0 0 10px #000;
+    -webkit-transform: rotateY(0deg); // flick fix
     overflow: hidden;
 
     position: absolute;
@@ -48,14 +85,6 @@ body {
     left: 50%;
     margin: -300px 0 0 -400px;
     background: #666 url('../images/cemetery-2.png') no-repeat;
-
-    &.ipad {
-      width: 1024px;
-      height: 768px;
-      top: 0;
-      left: 0;
-      margin: 0;
-    }
 
     #overlay {
       position: absolute;

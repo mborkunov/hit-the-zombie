@@ -6,6 +6,7 @@ goog.require('goog.dom.classes');
 goog.require('goog.style');
 goog.require('goog.events');
 goog.require('goog.userAgent');
+goog.require('goog.userAgent.product');
 
 
 /**
@@ -120,13 +121,11 @@ energy.zombie.Target.prototype.draw = function(container) {
   goog.dom.classes.add(this.targetElement, 'front');
   goog.dom.appendChild(container, this.targetElement);
 
-  //goog.events.listen(container, goog.events.EventType.TOUCHSTART, this.listener, true, this);
-  goog.events.listen(container, goog.events.EventType.MOUSEDOWN, this.listener, true, this);
-  /*if (goog.userAgent.MOBILE) {
-    goog.events.listen(container, goog.events.EventType.MOUSEDOWN, this.listener, true, this);
-  } else {
+  if (goog.userAgent.product.IPAD || goog.userAgent.product.ANDROID) {
     goog.events.listen(container, goog.events.EventType.TOUCHSTART, this.listener, true, this);
-  }*/
+  } else {
+    goog.events.listen(container, goog.events.EventType.MOUSEDOWN, this.listener, true, this);
+  }
 };
 
 /**
@@ -167,5 +166,6 @@ energy.zombie.Target.prototype.listener = function(e) {
     goog.dom.setTextContent(scoreElement, score);
     goog.style.setStyle(scoreElement, 'color', color);
   }
+  e.preventDefault();
   return false;
 };

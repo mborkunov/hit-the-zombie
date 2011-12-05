@@ -5,9 +5,11 @@ goog.require('goog.array');
 goog.require('goog.dom');
 goog.require('goog.dom.classes');
 goog.require('goog.style');
+goog.require('goog.userAgent.product');
 
 goog.require('goog.Timer');
 goog.require('energy.zombie.Target');
+goog.require('energy.userAgent');
 
 /**
  * @constructor
@@ -24,11 +26,38 @@ energy.zombie.Game = function() {
   goog.dom.setTextContent(this.startButton, 'Start')
   this.overlay = goog.dom.getElement('overlay');
   this.timerElement = goog.dom.getElement('timer');
-  goog.events.listen(this.startButton, goog.events.EventType.CLICK, this.startListener, true, this);
+  goog.events.listen(this.startButton, goog.events.EventType.MOUSEDOWN, this.startListener, true, this);
 
   if (localStorage.getItem('highscore')) {
     this.highscore = parseInt(localStorage.getItem('highscore'));
     this.showHighScore(this.highscore);
+  }
+  var ua = goog.userAgent.getUserAgentString();
+
+  if (ua.indexOf('Android') != -1) {
+    goog.dom.classes.add(document.body, 'android');
+  }
+  if (ua.indexOf('iPad') != -1) {
+    goog.dom.classes.add(document.body, 'ipad');
+  }
+
+  if (goog.userAgent.product.CHROME) {
+    goog.dom.classes.add(document.body, 'chrome');
+  }
+  if (goog.userAgent.product.SAFARI) {
+    goog.dom.classes.add(document.body, 'safari');
+  }
+  if (goog.userAgent.WEBKIT) {
+    goog.dom.classes.add(document.body, 'webkit');
+  }
+  if (goog.userAgent.GECKO) {
+    goog.dom.classes.add(document.body, 'gecko');
+  }
+  if (goog.userAgent.OPERA) {
+    goog.dom.classes.add(document.body, 'opera');
+  }
+  if (goog.userAgent.IE) {
+    goog.dom.classes.add(document.body, 'ie');
   }
 };
 
@@ -40,7 +69,8 @@ energy.zombie.Game.prototype.targets = [];
 /**
  * @type {number}
  */
-energy.zombie.Game.prototype.roundTime = 60;
+energy.zombie.Game.prototype.roundTime = 60; //test
+
 
 /**
  * @type {number}
@@ -210,7 +240,7 @@ energy.zombie.Game.prototype.setHighScore = function(newHighscore) {
 
 energy.zombie.Game.prototype.showHighScore = function(highscore) {
   var highScoreElement = goog.dom.getElement('highscore');
-  goog.dom.setTextContent(highScoreElement, 'High score: ' + this.highscore);
+  goog.dom.setTextContent(highScoreElement, 'Highscore: ' + this.highscore);
 };
 
 /**
