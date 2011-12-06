@@ -59,6 +59,12 @@ energy.zombie.Game = function() {
   if (goog.userAgent.IE) {
     goog.dom.classes.add(document.body, 'ie');
   }
+
+
+
+  window.applicationCache.addEventListener("updateready", function() {
+    window.applicationCache.swapCache();
+  }, false);
 };
 
 /**

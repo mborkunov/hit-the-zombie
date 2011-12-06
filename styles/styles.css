@@ -35,12 +35,12 @@ body.webkit {
   background: url('../images/alpha.png') 0 0 no-repeat, url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
 }
 
-body.gecko {
-  background: url('../images/alpha.png') 0 0 no-repeat, url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
+body.firefox {
+  background: url('../images/alpha.png') center center no-repeat, url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
 }
 
 body.opera {
-  background: url('../images/alpha.png') 0 0 no-repeat, url('../images/bg.png'), -o-linear-gradient(#012212, #000600);
+  background: url('../images/alpha.png') center center 0 no-repeat, url('../images/bg.png'), -o-linear-gradient(#012212, #000600);
 }
 
 body.ipad div, body.ipad button {
@@ -49,11 +49,27 @@ body.ipad div, body.ipad button {
   -webkit-box-shadow: none !important;
 }
 
+body.ipad #game-container {
+  width: 1024px !important;
+  height: 768px !important;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
 body.android div, body.android button {
   box-shadow: none !important;
   text-shadow: none !important;
-  color: red !important;
   -webkit-box-shadow: none !important;
+}
+
+body.android #game-container {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
 }
 
 body #game-container {
@@ -66,29 +82,12 @@ body #game-container {
   -webkit-transform: rotatey(0deg);
   overflow: hidden;
   position: absolute;
-  width: 1280px !important;
-  height: 800px !important;
+  width: 800px;
+  height: 600px;
   top: 50%;
   left: 50%;
   margin: -300px 0 0 -400px;
   background: #666666 url('../images/cemetery-2.png') no-repeat;
-}
-
-body #game-container.ipad {
-  width: 1024px;
-  height: 768px;
-  top: 0;
-  left: 0;
-  margin: 0;
-}
-
-body #game-container.android {
-  width: 1280px !important;
-  height: 800px !important;
-  position: relative;
-  top: 0;
-  left: 0;
-  margin: 0;
 }
 
 body #game-container #overlay {
@@ -142,18 +141,20 @@ body #game-container #start {
   height: 50px;
   margin: -25px 0 0 -100px;
   z-index: 11;
-  border: 5px solid rgba(0, 0, 0, 0.5);
-  border-radius: 25px;
+  border: 5px solid #022206;
+  border-radius: 5px;
   font-size: 30px;
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.8);
-  -webkit-box-shadow: 0 0 10px black;
+  background: -webkit-linear-gradient(darkGreen, #002515);
   cursor: pointer;
   text-align: center;
+  color: #cecece;
 }
 
 body #game-container #start:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: -webkit-linear-gradient(darkGreen, #002515);
+  color: #ffffff;
+  border-color: #023208;
 }
 
 body #game-container #start:active {
