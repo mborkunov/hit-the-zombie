@@ -22,8 +22,12 @@ energy.zombie.Game = function() {
   }
   this.draw();
 
+  this.soundButton = goog.dom.getElement('sound');
+  goog.events.listen(this.soundButton, goog.events.EventType.MOUSEDOWN, this.soundListener, true, this);
+  goog.dom.classes.add(this.soundButton, energy.sound.isEnabled() ? 'on' : 'off');
+
   this.startButton = goog.dom.getElement('start');
-  goog.dom.setTextContent(this.startButton, 'Start')
+  goog.dom.setTextContent(this.startButton, 'Start');
   this.overlay = goog.dom.getElement('overlay');
   this.timerElement = goog.dom.getElement('timer');
   goog.events.listen(this.startButton, goog.events.EventType.MOUSEDOWN, this.startListener, true, this);
@@ -62,8 +66,9 @@ energy.zombie.Game = function() {
 
 
 
-  window.applicationCache.addEventListener("updateready", function() {
-    window.applicationCache.swapCache();
+  window['applicationCache'].addEventListener("updateready", function() {
+    window['applicationCache']['swapCache']();
+    window.location.reload();
   }, false);
 };
 
@@ -102,6 +107,11 @@ energy.zombie.Game.prototype.container = null;
  * @type {Element}
  */
 energy.zombie.Game.prototype.startButton = null;
+
+/**
+ * @type {Element}
+ */
+energy.zombie.Game.prototype.soundButton = null;
 
 /**
  * @type {Element}
@@ -230,11 +240,26 @@ energy.zombie.Game.prototype.getActiveTargets = function() {
   });
 };
 
-energy.zombie.Game.prototype.startListener = function() {
+energy.zombie.Game.prototype.startListener = function(e) {
+  e.preventDefault();
   goog.style.setStyle(this.startButton, 'display', 'none');
   goog.style.setStyle(this.overlay, 'display', 'none');
+  energy.sound.play('bell', true);
 
   this.start();
+  return false;
+};
+
+energy.zombie.Game.prototype.soundListener = function(e) {
+  e.preventDefault();
+  energy.sound.setEnabled(!energy.sound.isEnabled());
+  if (energy.sound.isEnabled()) {
+    goog.dom.classes.add(this.soundButton, 'on');
+    goog.dom.classes.remove(this.soundButton, 'off');
+  } else {
+    goog.dom.classes.add(this.soundButton, 'off');
+    goog.dom.classes.remove(this.soundButton, 'on');
+  }
   return false;
 };
 

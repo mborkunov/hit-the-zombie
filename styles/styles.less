@@ -1,7 +1,7 @@
 * {
   padding: 0;
   margin: 0;
-  font-family: serif;
+  font-family: 'PT Sans Caption';
 }
 
 html, body {
@@ -29,6 +29,9 @@ html, body {
 body {
   &.webkit {
     background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
+    #sound {
+      display: block !important;
+    }
   }
   &.firefox {
     background: url('../images/alpha.png') center center no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
@@ -98,15 +101,31 @@ body {
 
     #score {
       font-size: 100px;
-      font-weight: bold;
+      font-weight: normal;
       color: yellow;
       text-align: center;
       text-shadow: black 0px 0px 10px;
       z-index: 9;
     }
+
+    #sound {
+      display: none;
+      position: absolute;
+      bottom: 0px;
+      left: 10px;
+      width: 128px;
+      height: 128px;
+      z-index: 11;
+      &.on {
+        background: transparent url('../images/sound-on.png') 0 0 no-repeat;
+      }
+      &.off {
+        background: transparent url('../images/sound-off.png') 0 0 no-repeat;
+      }
+    }
+
     #highscore {
-      font-size: 40px;
-      font-weight: bold;
+      font-size: 25px;
       color: yellow;
       text-align: left;
       text-shadow: black 0px 0px 10px;
@@ -119,8 +138,7 @@ body {
       position: absolute;
       top: 10px;
       right: 20px;
-      font-size: 100px;
-      font-weight: bold;
+      font-size: 40px;
       color: yellow;
       text-align: center;
       text-shadow: black 0px 0px 10px;
@@ -137,7 +155,6 @@ body {
       border: 5px solid #022206;
       border-radius: 5px;
       font-size: 30px;
-      font-weight: bold;
       background: -webkit-linear-gradient(darkGreen,#002515);
       cursor: pointer;
       text-align: center;

@@ -8,6 +8,7 @@ goog.require('goog.events');
 goog.require('goog.userAgent');
 goog.require('goog.userAgent.product');
 
+goog.require('energy.sound');
 
 /**
  * @constructor
@@ -20,11 +21,6 @@ energy.zombie.Target = function(game) {
  * @type {Element}
  */
 energy.zombie.Target.prototype.targetElement = null;
-
-/**
- * @type {Map}
- */
-energy.zombie.Target.prototype.audio = null;
 
 /**
  * @type {energy.zombie.Game}
@@ -126,16 +122,6 @@ energy.zombie.Target.prototype.draw = function(container) {
   goog.dom.classes.add(this.targetElement, 'front');
   goog.dom.appendChild(container, this.targetElement);
 
-  this.audio = {success: null, fail: null};
-
-  this.audio.success = goog.dom.createElement('audio');
-  this.audio.success.setAttribute('src', 'sounds/hit.wav');
-  goog.dom.appendChild(container, this.audio.success);
-
-  this.audio.fail = goog.dom.createElement('audio');
-  this.audio.fail.setAttribute('src', 'sounds/croc_chomp.wav');
-  goog.dom.appendChild(container, this.audio.fail);
-
   if (goog.userAgent.product.IPAD || goog.userAgent.product.ANDROID) {
     goog.events.listen(container, goog.events.EventType.TOUCHSTART, this.listener, true, this);
   } else {
@@ -164,14 +150,14 @@ energy.zombie.Target.prototype.listener = function(e) {
   if (this.front) {
     color = 'red';
     score = Math.max(0, this.game.score - 5);
-    this.audio.fail.play();
+    energy.sound.play("fail", true);
   } else {
     if (!this.rotating) {
       color = 'green';
       this.rotate(1, 500, null);
       score = this.game.score + 10;
       goog.dom.classes.add(this.targetElement, 'zombie-dead');
-      this.audio.success.play();
+      energy.sound.play('hit');
     } else {
       color = 'silver';
     }

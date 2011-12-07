@@ -1,8 +1,7 @@
 CACHE MANIFEST
 
 CACHE:
-#r8
-
+#r15
 favicon.ico
 zombie.js
 styles/styles.css
@@ -17,7 +16,7 @@ images/zombie-2.png
 images/zombie-3.png
 
 sounds/hit.wav
-sounds/croc_chomp.wav
+sounds/fail.wav
 
 NETWORK:
 *
