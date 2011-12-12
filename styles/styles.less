@@ -27,20 +27,20 @@ html, body {
 }
 
 body {
+  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
   &.webkit {
     background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
     #sound {
       display: block !important;
     }
   }
-  &.firefox {
-    background: url('../images/alpha.png') center center no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
+  &.gecko {
+    background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
   }
   &.opera {
-    background: url('../images/alpha.png') center center 0 no-repeat,  url('../images/bg.png'), -o-linear-gradient(#012212, #000600);
+    background: -o-linear-gradient(#012212, #000600);
   }
   overflow: hidden;
-
   &.ipad {
     div, button {
       box-shadow: none !important;
@@ -71,6 +71,41 @@ body {
     }
   }
 
+  #install-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #4D7BD6;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5689db), color-stop(100%, #4d7bd6));
+    background: -webkit-linear-gradient(top, #5689db 0%, #4d7bd6 100%);
+    background: linear-gradient(top, #5689db 0%, #4d7bd6 100%);
+
+    line-height: 16px;
+    padding: 5px 20px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #2D53AF;
+    cursor: pointer;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    -webkit-box-shadow: 0 2px 0 0 rgba(255,255,255,.06) inset,0 2px 3px 0 rgba(0,0,0,.2);
+    -moz-box-shadow: 0 2px 0 0 rgba(255,255,255,.06) inset,0 2px 3px 0 rgba(0,0,0,.2);
+    box-shadow: 0 2px 0 0 rgba(255,255,255,.06) inset,0 2px 3px 0 rgba(0,0,0,.2);
+    outline: 0;
+    &:hover {
+      border-color: #4076FF;
+      background: #5C92FF;
+      background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#669EFF),color-stop(100%,#5286FF));
+      background: -webkit-linear-gradient(top,#669EFF 0%,#5286FF 100%);
+      background: linear-gradient(top,#669EFF 0%,#5286FF 100%);
+    }
+  }
+
   #game-container {
     border: 1px solid #222;
     position: absolute;
@@ -87,7 +122,7 @@ body {
     top: 50%;
     left: 50%;
     margin: -300px 0 0 -400px;
-    background: #666 url('../images/cemetery-2.png') no-repeat;
+    background: #012212 url('../images/cemetery-2.png') no-repeat;
 
     #overlay {
       position: absolute;
@@ -156,11 +191,15 @@ body {
       border-radius: 5px;
       font-size: 30px;
       background: -webkit-linear-gradient(darkGreen,#002515);
+      background: -moz-linear-gradient(darkGreen,#002515);
+      background: -o-linear-gradient(darkGreen,#002515);
       cursor: pointer;
       text-align: center;
       color: #cecece;
       &:hover {
         background: -webkit-linear-gradient(darkGreen,#002515);
+        background: -moz-linear-gradient(darkGreen,#002515);
+        background: -o-linear-gradient(darkGreen,#002515);
         color: #ffffff;
         border-color: #023208;
       }

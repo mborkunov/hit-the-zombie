@@ -2,14 +2,15 @@
 <html lang="en" manifest="cache.appcache">
   <head>
     <title>Hit the Zombie</title>
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:regular,bold&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/less" href="styles/styles.css"/>
-    <script type="text/javascript" src="zombie.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:regular,bold&subset=cyrillic,latin' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
     <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/cdpebmkkeejgmpkoogiokciagicmdkmj"/>
+    <script type="text/javascript" src="zombie.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
   </head>
   <body>
     <div id="game-container">
@@ -20,13 +21,26 @@
       <button id="start">Loading...</button>
       <div id="overlay"></div>
     </div>
+    <button style="display: none" id="install-button">Add to Chrome</button>
+    <a id="author" href="mailto:Maxim Borkunov <maxim.borkunov@gmail.com>">Maxim Borkunov</a>
     <div class="addthis_toolbox addthis_default_style ">
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        <a class="addthis_button_tweet"></a>
-        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-        <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebec28530613127"></script>
-      <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebec28530613127"></script>
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <a class="addthis_button_tweet"></a>
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+      <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebec28530613127"></script>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebec28530613127"></script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-26880279-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+      </script>
   </body>
 </html>

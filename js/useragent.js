@@ -52,8 +52,16 @@ energy.userAgent.detect = function() {
     energy.userAgent.FIREFOX = true;
   }
 
+  if (goog.userAgent.GECKO) {
+    energy.userAgent.GECKO = true;
+  }
+
   if (ua.indexOf('WebKit') != -1) {
     energy.userAgent.WEBKIT = true;
+  }
+
+  if (ua.indexOf('Opera') != -1) {
+    energy.userAgent.OPERA = true;
   }
 };
 
