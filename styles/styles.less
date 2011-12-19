@@ -27,18 +27,35 @@ html, body {
 }
 
 body {
-  background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
-  &.webkit {
+  &.zombie {
     background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
-    #sound {
-      display: block !important;
+    &.webkit {
+      background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
+      #sound {
+        display: block !important;
+      }
+    }
+    &.gecko {
+      background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
+    }
+    &.opera {
+      background: -o-linear-gradient(#012212, #000600);
     }
   }
-  &.gecko {
-    background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
-  }
-  &.opera {
-    background: -o-linear-gradient(#012212, #000600);
+  &.cat {
+    background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(purple, #000600);
+    &.webkit {
+      background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(purple, #000600);
+      #sound {
+        display: block !important;
+      }
+    }
+    &.gecko {
+      background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(purple, #000600);
+    }
+    &.opera {
+      background: -o-linear-gradient(purple, #000600);
+    }
   }
   overflow: hidden;
   &.ipad {
@@ -122,7 +139,6 @@ body {
     top: 50%;
     left: 50%;
     margin: -300px 0 0 -400px;
-    background: #012212 url('../images/cemetery-2.png') no-repeat;
 
     #overlay {
       position: absolute;
@@ -159,6 +175,18 @@ body {
       }
     }
 
+    #theme {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      background-color: silver;
+      border-radius: 20px;
+
+      z-index: 11;
+    }
+
     #highscore {
       font-size: 25px;
       color: yellow;
@@ -179,6 +207,7 @@ body {
       text-shadow: black 0px 0px 10px;
       z-index: 9;
     }
+
     #start {
       position: absolute;
       top: 50%;
@@ -187,27 +216,59 @@ body {
       height: 50px;
       margin: -25px 0 0 -100px;
       z-index: 11;
-      border: 5px solid #022206;
-      border-radius: 5px;
-      font-size: 30px;
-      background: -webkit-linear-gradient(darkGreen,#002515);
-      background: -moz-linear-gradient(darkGreen,#002515);
-      background: -o-linear-gradient(darkGreen,#002515);
-      cursor: pointer;
+
+      background-color: #0d4319;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#0d4319), to(#07150e));
+      /* Saf4+, Chrome */
+      background-image: -webkit-linear-gradient(top, #0d4319, #07150e);
+      background-image: -moz-linear-gradient(top, #0d4319, #07150e);
+      background-image: -ms-linear-gradient(top, #0d4319, #07150e);
+      background-image: -o-linear-gradient(top, #0d4319, #07150e);
+      background-image: linear-gradient(top, #0d4319, #07150e);
+      border: 1px solid #0b2217;
+      border-bottom: 1px solid #0b2217;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+      border-radius: 3px;
+      -webkit-box-shadow: inset 0 1px 0 0 #0d4319; // 0b2217
+      -moz-box-shadow: inset 0 1px 0 0 #0d4319;
+      -ms-box-shadow: inset 0 1px 0 0 #0d4319;
+      -o-box-shadow: inset 0 1px 0 0 #0d4319;
+      box-shadow: inset 0 1px 0 0 #0d4319;
+      color: #fff;
+      //font: bold 20px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1;
+      padding: 7px 0 8px 0;
       text-align: center;
-      color: #cecece;
+      text-shadow: 0 -1px 0 #4c9021;
       &:hover {
-        background: -webkit-linear-gradient(darkGreen,#002515);
-        background: -moz-linear-gradient(darkGreen,#002515);
-        background: -o-linear-gradient(darkGreen,#002515);
-        color: #ffffff;
-        border-color: #023208;
+        background-color: #07150e;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#07150e), to(#0d4319));
+        /* Saf4+, Chrome */
+        background-image: -webkit-linear-gradient(top, #07150e, #0d4319);
+        background-image: -moz-linear-gradient(top, #07150e, #0d4319);
+        background-image: -ms-linear-gradient(top, #07150e, #0d4319);
+        background-image: -o-linear-gradient(top, #07150e, #0d4319);
+        background-image: linear-gradient(top, #07150e, #0d4319);
+        -webkit-box-shadow: inset 0 1px 0 0 #0d4319;
+        -moz-box-shadow: inset 0 1px 0 0 #0d4319;
+        -ms-box-shadow: inset 0 1px 0 0 #0d4319;
+        -o-box-shadow: inset 0 1px 0 0 #0d4319;
+        box-shadow: inset 0 1px 0 0 #0d4319;
+        cursor: pointer;
       }
       &:active {
-        width: 190px;
-        height: 44px;
-        font-size: 25px;
-        margin: -22px 0 0 -95px;
+        border: 1px solid #07230e;
+        border-bottom: 1px solid #07230e;
+        -webkit-box-shadow: inset 0 0 8px 4px #07230e, 0 1px 0 0 #07090e;
+        -moz-box-shadow: inset 0 0 8px 4px #07230e, 0 1px 0 0 #07090e;
+        -ms-box-shadow: inset 0 0 8px 4px #07230e, 0 1px 0 0 #07090e;
+        -o-box-shadow: inset 0 0 8px 4px #07230e, 0 1px 0 0 #07090e;
+        box-shadow: inset 0 0 8px 4px #07230e, 0 1px 0 0 #07090e;
       }
     }
 
@@ -221,27 +282,73 @@ body {
         border-radius: 50px;
         background: #fff;
         cursor: pointer;
-        &.front {
-          background: #fff url('../images/target.png') 0 0 no-repeat;
+      }
+    }
+  }
+
+  &.zombie #theme {
+    border: 3px solid #0c3f18;
+    background: url('../images/zombie/icon.png') 2px 3px no-repeat;
+  }
+  &.cat #theme {
+    border: 3px solid #d49299;
+    background: url('../images/cat/icon.png') 5px 5px no-repeat;
+  }
+
+
+
+  &.zombie #game-container {
+    background: #012212 url('../images/zombie/cemetery-2.png') no-repeat;
+    .target {
+      &.front {
+        background: #fff url('../images/zombie/target.png') 0 0 no-repeat;
+      }
+      &.target {
+        &.target-1 {
+          background: #fff url('../images/zombie/zombie-1.png') 25px 10px no-repeat;
+          &.target-hit {
+            background: url('../images/zombie/cross.png') 10px 10px no-repeat, #fff url('../images/zombie/zombie-1.png') 25px 10px no-repeat;
+          }
         }
-        &.zombie {
-          &.zombie-1 {
-            background: #fff url('../images/zombie-1.png') 25px 10px no-repeat;
-            &.zombie-dead {
-              background: url('../images/cross.png') 10px 10px no-repeat, #fff url('../images/zombie-1.png') 25px 10px no-repeat;
-            }
+        &.target-2 {
+          background: #fff url('../images/zombie/zombie-2.png') 15px 10px no-repeat;
+          &.target-hit {
+            background: url('../images/zombie/cross.png') 10px 10px no-repeat, #fff url('../images/zombie/zombie-2.png') 15px 10px no-repeat;
           }
-          &.zombie-2 {
-            background: #fff url('../images/zombie-2.png') 15px 10px no-repeat;
-            &.zombie-dead {
-              background: url('../images/cross.png') 10px 10px no-repeat, #fff url('../images/zombie-2.png') 15px 10px no-repeat;
-            }
+        }
+        &.target-3 {
+          background: #fff url('../images/zombie/zombie-3.png') 15px 10px no-repeat;
+          &.target-hit {
+            background: url('../images/zombie/cross.png') 10px 10px no-repeat, #fff url('../images/zombie/zombie-3.png') 15px 10px no-repeat;
           }
-          &.zombie-3 {
-            background: #fff url('../images/zombie-3.png') 15px 10px no-repeat;
-            &.zombie-dead {
-              background: url('../images/cross.png') 10px 10px no-repeat, #fff url('../images/zombie-3.png') 15px 10px no-repeat;
-            }
+        }
+      }
+    }
+  }
+
+  &.cat #game-container {
+    background: purple url('../images/cat/bg.png');
+    .target {
+      &.front {
+        background: url('../images/cat/plate.png') 0 0 no-repeat;
+      }
+      &.target {
+        &.target-1 {
+          background: #fff url('../images/cat/cat-1.png') 10px 10px no-repeat;
+          &.target-hit {
+            background: url('../images/cat/cross.png') 10px 10px no-repeat, #fff url('../images/cat/cat-1.png') 10px 10px no-repeat;
+          }
+        }
+        &.target-2 {
+          background: #fff url('../images/cat/cat-2.png') 10px 10px no-repeat;
+          &.target-hit {
+            background: url('../images/cat/cross.png') 10px 10px no-repeat, #fff url('../images/cat/cat-2.png') 10px 10px no-repeat;
+          }
+        }
+        &.target-3 {
+          background: #fff url('../images/cat/cat-3.png') 10px 10px no-repeat;
+          &.target-hit {
+            background: url('../images/cat/cross.png') 10px 10px no-repeat, #fff url('../images/cat/cat-3.png') 10px 10px   no-repeat;
           }
         }
       }

@@ -10,11 +10,17 @@ goog.require('goog.userAgent.product');
 goog.require('goog.Timer');
 goog.require('energy.zombie.Target');
 goog.require('energy.userAgent');
+goog.require('energy.theme');
 
 /**
  * @constructor
  */
 energy.zombie.Game = function() {
+  window['applicationCache'].addEventListener("updateready", function() {
+    window['applicationCache']['swapCache']();
+    window.location.reload();
+  }, false);
+
   energy.zombie.Game.prototype.container = goog.dom.getElement('game-container');
 
   for (var i = 0; i < 15; i++) {
@@ -23,18 +29,25 @@ energy.zombie.Game = function() {
   this.draw();
 
   this.soundButton = goog.dom.getElement('sound');
-  goog.events.listen(this.soundButton, goog.events.EventType.MOUSEDOWN, this.soundListener, true, this);
-  goog.dom.classes.add(this.soundButton, energy.sound.isEnabled() ? 'on' : 'off');
+  if (this.soundButton) {
+    goog.events.listen(this.soundButton, goog.events.EventType.MOUSEDOWN, this.soundListener, true, this);
+    goog.dom.classes.add(this.soundButton, energy.sound.isEnabled() ? 'on' : 'off');
+  }
 
   this.startButton = goog.dom.getElement('start');
   goog.dom.setTextContent(this.startButton, 'Start');
   this.overlay = goog.dom.getElement('overlay');
   this.timerElement = goog.dom.getElement('timer');
-  goog.events.listen(this.startButton, goog.events.EventType.MOUSEDOWN, this.startListener, true, this);
+  goog.events.listen(this.startButton, goog.events.EventType.MOUSEUP, this.startListener, true, this);
 
-  if (localStorage.getItem('highscore')) {
-    this.highscore = parseInt(localStorage.getItem('highscore'));
-    this.showHighScore(this.highscore);
+  var themeSwitcher = goog.dom.getElement('theme');
+  goog.events.listen(themeSwitcher, goog.events.EventType.MOUSEDOWN, this.themeSwitcherListener, true, this);
+
+  if (localStorage) {
+    if (localStorage.getItem('highscore')) {
+      this.highscore = parseInt(localStorage.getItem('highscore'));
+      this.showHighScore(this.highscore);
+    }
   }
 
   if (energy.userAgent.ANDROID) {
@@ -75,10 +88,7 @@ energy.zombie.Game = function() {
     }
   }
 
-  window['applicationCache'].addEventListener("updateready", function() {
-    window['applicationCache']['swapCache']();
-    window.location.reload();
-  }, false);
+  energy.theme.init();
 };
 
 /**
@@ -133,7 +143,7 @@ energy.zombie.Game.prototype.timerElement = null;
 energy.zombie.Game.prototype.overlay = null;
 
 energy.zombie.Game.prototype.install = function() {
-  var link = "https://chrome.google.com/webstore/detail/cdpebmkkeejgmpkoogiokciagicmdkmj";
+  var link = goog.dom.getElement('chrome-link').getAttribute('href');
   chrome['webstore']['install'](link, function() {
     var installButton = goog.dom.getElement('install-button');
     if (installButton) {
@@ -261,6 +271,7 @@ energy.zombie.Game.prototype.getActiveTargets = function() {
 
 energy.zombie.Game.prototype.startListener = function(e) {
   e.preventDefault();
+  energy.sound.play('start', 'ogg');
   goog.style.setStyle(this.startButton, 'display', 'none');
   goog.style.setStyle(this.overlay, 'display', 'none');
 
@@ -281,6 +292,11 @@ energy.zombie.Game.prototype.soundListener = function(e) {
   return false;
 };
 
+energy.zombie.Game.prototype.themeSwitcherListener = function(e) {
+  e.preventDefault();
+  energy.theme.nextTheme();
+};
+
 energy.zombie.Game.prototype.setHighScore = function(newHighscore) {
   this.highscore = newHighscore;
   localStorage.setItem('highscore', this.highscore);
@@ -290,6 +306,36 @@ energy.zombie.Game.prototype.setHighScore = function(newHighscore) {
 energy.zombie.Game.prototype.showHighScore = function(highscore) {
   var highScoreElement = goog.dom.getElement('highscore');
   goog.dom.setTextContent(highScoreElement, 'Highscore: ' + this.highscore);
+};
+
+energy.zombie.Game.prototype.authenticate = function() {
+  var config = {
+    'client_id': '553794839019.apps.googleusercontent.com',
+    'scope': 'https://www.googleapis.com/auth/plus.me'
+  };
+  gapi['auth']['authorize'](config, function(authResult) {
+    if (authResult) {
+      console.log('login complete');
+      console.log(gapi['auth']['getToken']());
+      gapi['client']['load']('plus', 'v1', function() {
+        var request = gapi['client']['plus']['people']['get']({
+          'userId': 'me'
+        });
+        request.execute(function(response) {
+          console.log(response);
+          /*var heading = document.createElement('h4');
+          var image = document.createElement('img');
+          image.src = resp.image.url;
+          heading.appendChild(image);
+          heading.appendChild(document.createTextNode(resp.displayName));
+
+          document.getElementById('content').appendChild(heading);*/
+        });
+      });
+    } else {
+      console.log('cannot login');
+    }
+  });
 };
 
 /**

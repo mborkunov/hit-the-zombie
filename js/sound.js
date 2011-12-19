@@ -1,33 +1,41 @@
 goog.provide('energy.sound');
 
 goog.require('goog.events');
+goog.require('energy.theme');
 
 energy.sound.initialized = false;
 energy.sound.enabled = true;
 energy.sound._buffers = {};
 energy.sound.ctx = null;
 
-energy.sound.play = function(name, mp3) {
+energy.sound.play = function(name, format) {
   if (!energy.sound.isEnabled()) return;
-  if (typeof (energy.sound._buffers[name]) == 'undefined') {
+  format = format || 'wav';
+  if (typeof (energy.sound._buffers[energy.theme.current]) == 'undefined') {
+    energy.sound._buffers[energy.theme.current] = {};
+  }
+  if (typeof (energy.sound._buffers[energy.theme.current][name]) == 'undefined') {
+
     var xhr = new XMLHttpRequest();
-    xhr.open('get', 'sounds/' + name + (mp3 ? '.mp3' : '.wav'), true);
+    xhr.open('get', 'sounds/' + energy.theme.current + '/' + name + '.' + format, true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = function() {
       energy.sound.ctx['decodeAudioData'](xhr.response, function(buffer) {
-        energy.sound._buffers[name] = buffer;
+        energy.sound._buffers[energy.theme.current][name] = buffer;
         energy.sound._playBuffer(buffer);
       }, function() {
-        console.log('Cannot load sound buffer', arguments);
+        console.error('Cannot load sound buffer', arguments);
+        energy.sound._buffers[energy.theme.current][name] = null;
       });
     };
     xhr.send();
   } else {
-    energy.sound._playBuffer(energy.sound._buffers[name]);
+    energy.sound._playBuffer(energy.sound._buffers[energy.theme.current][name]);
   }
 };
 
 energy.sound._playBuffer = function(buffer) {
+  if (!buffer) return;
   var source = energy.sound.ctx['createBufferSource'](0);
   source.buffer = buffer;
   source['connect'](energy.sound.ctx['destination']);

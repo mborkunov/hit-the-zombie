@@ -2,6 +2,7 @@
 // Please do not edit.
 goog.addDependency('../../../../js/deps.js', [], []);
 goog.addDependency('../../../../js/sound.js', ['energy.sound'], ['goog.events']);
+goog.addDependency('../../../../js/theme.js', ['energy.theme'], ['goog.dom', 'goog.dom.classes']);
 goog.addDependency('../../../../js/useragent.js', ['energy.userAgent'], ['goog.userAgent']);
-goog.addDependency('../../../../js/zombie/game.js', ['energy.zombie', 'energy.zombie.Game'], ['energy.userAgent', 'energy.zombie.Target', 'goog.Timer', 'goog.array', 'goog.dom', 'goog.dom.classes', 'goog.style', 'goog.userAgent.product']);
+goog.addDependency('../../../../js/zombie/game.js', ['energy.zombie', 'energy.zombie.Game'], ['energy.theme', 'energy.userAgent', 'energy.zombie.Target', 'goog.Timer', 'goog.array', 'goog.dom', 'goog.dom.classes', 'goog.style', 'goog.userAgent.product']);
 goog.addDependency('../../../../js/zombie/target.js', ['energy.zombie.Target'], ['energy.sound', 'goog.dom', 'goog.dom.classes', 'goog.events', 'goog.style', 'goog.userAgent', 'goog.userAgent.product']);

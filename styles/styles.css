@@ -127,7 +127,7 @@ body #game-container {
   top: 50%;
   left: 50%;
   margin: -300px 0 0 -400px;
-  background: #012212 url('../images/cemetery-2.png') no-repeat;
+  background: #012212 url('../images/zombie/cemetery-2.png') no-repeat;
 }
 
 body #game-container #overlay {
@@ -238,29 +238,29 @@ body #game-container .target-container .target {
 }
 
 body #game-container .target-container .target.front {
-  background: #ffffff url('../images/target.png') 0 0 no-repeat;
+  background: #ffffff url('../images/zombie/target.png') 0 0 no-repeat;
 }
 
 body #game-container .target-container .target.zombie.zombie-1 {
-  background: #ffffff url('../images/zombie-1.png') 25px 10px no-repeat;
+  background: #ffffff url('../images/zombie/zombie-1.png') 25px 10px no-repeat;
 }
 
 body #game-container .target-container .target.zombie.zombie-1.zombie-dead {
-  background: url('../images/cross.png') 10px 10px no-repeat, #ffffff url('../images/zombie-1.png') 25px 10px no-repeat;
+  background: url('../images/zombie/cross.png') 10px 10px no-repeat, #ffffff url('../images/zombie/zombie-1.png') 25px 10px no-repeat;
 }
 
 body #game-container .target-container .target.zombie.zombie-2 {
-  background: #ffffff url('../images/zombie-2.png') 15px 10px no-repeat;
+  background: #ffffff url('../images/zombie/zombie-2.png') 15px 10px no-repeat;
 }
 
 body #game-container .target-container .target.zombie.zombie-2.zombie-dead {
-  background: url('../images/cross.png') 10px 10px no-repeat, #ffffff url('../images/zombie-2.png') 15px 10px no-repeat;
+  background: url('../images/zombie/cross.png') 10px 10px no-repeat, #ffffff url('../images/zombie/zombie-2.png') 15px 10px no-repeat;
 }
 
 body #game-container .target-container .target.zombie.zombie-3 {
-  background: #ffffff url('../images/zombie-3.png') 15px 10px no-repeat;
+  background: #ffffff url('../images/zombie/zombie-3.png') 15px 10px no-repeat;
 }
 
 body #game-container .target-container .target.zombie.zombie-3.zombie-dead {
-  background: url('../images/cross.png') 10px 10px no-repeat, #ffffff url('../images/zombie-3.png') 15px 10px no-repeat;
+  background: url('../images/zombie/cross.png') 10px 10px no-repeat, #ffffff url('../images/zombie/zombie-3.png') 15px 10px no-repeat;
 }

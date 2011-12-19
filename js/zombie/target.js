@@ -75,6 +75,7 @@ energy.zombie.Target.prototype.continueRotating = function() {
   if (this.angle >= 360) {
     this.angle %= 360;
   }
+  var className = 'target';
 
   if (this.angle % 180 == 0) {
     this.currentTurn++;
@@ -87,20 +88,21 @@ energy.zombie.Target.prototype.continueRotating = function() {
   if (this.currentTurn <= this.turns) {
     if (this.angle < 90 && this.angle + energy.zombie.Target.angleIncrese >= 90) {
       goog.dom.classes.remove(this.targetElement, 'front');
-      goog.dom.classes.remove(this.targetElement, 'zombie-dead');
-      goog.dom.classes.add(this.targetElement, 'zombie');
+      goog.dom.classes.remove(this.targetElement, 'target-hit');
+      goog.dom.classes.add(this.targetElement, 'target');
 
       var number = Math.ceil(Math.random() * 3);
-      goog.dom.classes.add(this.targetElement, 'zombie-' + number);
+      goog.dom.classes.add(this.targetElement, className + '-' + number);
       this.front = false;
     }
     if (this.angle < 270 && this.angle + energy.zombie.Target.angleIncrese >= 270) {
-      goog.dom.classes.add(this.targetElement, 'front');
-      goog.dom.classes.remove(this.targetElement, 'zombie');
-      goog.dom.classes.remove(this.targetElement, 'zombie-1');
-      goog.dom.classes.remove(this.targetElement, 'zombie-2');
-      goog.dom.classes.remove(this.targetElement, 'zombie-3');
-      goog.dom.classes.remove(this.targetElement, 'zombie-dead');
+      goog.dom.classes.add(this.targetElement, 'front target');
+      //goog.dom.classes.remove(this.targetElement, 'target');
+      for (var i = 1; i <=3; i++) {
+        goog.dom.classes.remove(this.targetElement, 'target-' + i);
+      }
+      goog.dom.classes.remove(this.targetElement, 'target-hit');
+
       this.front = true;
     }
 
@@ -108,8 +110,10 @@ energy.zombie.Target.prototype.continueRotating = function() {
       goog.style.setStyle(this.targetElement, '-webkit-transform', 'rotateY(' + this.angle + 'deg)');
     } else if (goog.userAgent.GECKO) {
       goog.style.setStyle(this.targetElement, '-moz-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
+    } else if (goog.userAgent.IE) {
+      goog.style.setStyle(this.targetElement, '-ms-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
     } else {
-      goog.style.setStyle(this.targetElement, '-o-transform', 'scaleX(' + Math.cos(this.angle * Math.PI / 180) + ')');
+      goog.style.setStyle(this.targetElement, '-o-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
     }
 
     this.angle += energy.zombie.Target.angleIncrese;
@@ -140,27 +144,23 @@ energy.zombie.Target.prototype.rotate = function(turns) {
   this.rotating = true;
   this.turns = turns;
   this.currentTurn = 0;
-  goog.style.setStyle(this.targetElement, 'background-color', '#fff');
 };
 
 
 energy.zombie.Target.prototype.listener = function(e) {
+  if (!e.isButton(goog.events.BrowserEvent.MouseButton.LEFT)) return;
   var score = this.game.score;
   var color = null;
   if (this.front) {
     color = 'red';
     score = Math.max(0, this.game.score - 5);
-    energy.sound.play("fail", true);
+    energy.sound.play("fail", 'ogg');
   } else {
-    if (!this.rotating) {
-      color = 'green';
-      this.rotate(1, 500, null);
-      score = this.game.score + 10;
-      goog.dom.classes.add(this.targetElement, 'zombie-dead');
-      energy.sound.play('hit');
-    } else {
-      color = 'silver';
-    }
+    color = 'green';
+    this.rotate(1);
+    score = this.game.score + 10;
+    goog.dom.classes.add(this.targetElement, 'target-hit');
+    energy.sound.play('hit', 'ogg');
   }
 
   if (score != this.score) {
