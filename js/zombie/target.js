@@ -150,13 +150,13 @@ energy.zombie.Target.prototype.rotate = function(turns) {
 energy.zombie.Target.prototype.listener = function(e) {
   if (!e.isButton(goog.events.BrowserEvent.MouseButton.LEFT)) return;
   var score = this.game.score;
-  var color = null;
+  var className = null;
   if (this.front) {
-    color = 'red';
+    className = 'shrink';
     score = Math.max(0, this.game.score - 5);
     energy.sound.play("fail", 'ogg');
   } else {
-    color = 'green';
+    className = 'grow';
     this.rotate(1);
     score = this.game.score + 10;
     goog.dom.classes.add(this.targetElement, 'target-hit');
@@ -167,7 +167,8 @@ energy.zombie.Target.prototype.listener = function(e) {
     this.game.score = score;
     var scoreElement = goog.dom.getElement('score');
     goog.dom.setTextContent(scoreElement, score);
-    goog.style.setStyle(scoreElement, 'color', color);
+    scoreElement.className = '';
+    goog.dom.classes.add(scoreElement, className);
   }
   e.preventDefault();
   return false;

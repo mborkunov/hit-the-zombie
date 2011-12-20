@@ -22,6 +22,7 @@ energy.zombie.Game = function() {
   }, false);
 
   energy.zombie.Game.prototype.container = goog.dom.getElement('game-container');
+  energy.theme.init();
 
   for (var i = 0; i < 15; i++) {
     this.targets.push(new energy.zombie.Target(this));
@@ -41,7 +42,9 @@ energy.zombie.Game = function() {
   goog.events.listen(this.startButton, goog.events.EventType.MOUSEUP, this.startListener, true, this);
 
   var themeSwitcher = goog.dom.getElement('theme');
-  goog.events.listen(themeSwitcher, goog.events.EventType.MOUSEDOWN, this.themeSwitcherListener, true, this);
+  if (themeSwitcher) {
+    goog.events.listen(themeSwitcher, goog.events.EventType.MOUSEDOWN, this.themeSwitcherListener, true, this);
+  }
 
   if (localStorage) {
     if (localStorage.getItem('highscore')) {
@@ -87,8 +90,6 @@ energy.zombie.Game = function() {
       }
     }
   }
-
-  energy.theme.init();
 };
 
 /**
@@ -308,6 +309,7 @@ energy.zombie.Game.prototype.showHighScore = function(highscore) {
   goog.dom.setTextContent(highScoreElement, 'Highscore: ' + this.highscore);
 };
 
+/*
 energy.zombie.Game.prototype.authenticate = function() {
   var config = {
     'client_id': '553794839019.apps.googleusercontent.com',
@@ -323,13 +325,15 @@ energy.zombie.Game.prototype.authenticate = function() {
         });
         request.execute(function(response) {
           console.log(response);
-          /*var heading = document.createElement('h4');
+          */
+/*var heading = document.createElement('h4');
           var image = document.createElement('img');
           image.src = resp.image.url;
           heading.appendChild(image);
           heading.appendChild(document.createTextNode(resp.displayName));
 
-          document.getElementById('content').appendChild(heading);*/
+          document.getElementById('content').appendChild(heading);*//*
+
         });
       });
     } else {
@@ -337,6 +341,7 @@ energy.zombie.Game.prototype.authenticate = function() {
     }
   });
 };
+*/
 
 /**
  * Application entry point

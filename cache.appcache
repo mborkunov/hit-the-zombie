@@ -1,22 +1,37 @@
 CACHE MANIFEST
 
 CACHE:
-#r32
+#r36
 favicon.ico
 zombie.js
 styles/styles.css
-images/cemetery-2.png
-images/cross.png
 images/bg.png
 images/alpha.png
 images/draft.png
-images/target.png
-images/zombie-1.png
-images/zombie-2.png
-images/zombie-3.png
+images/sound-on.png
+images/sound-off.png
 
-sounds/hit.wav
-sounds/fail.mp3
+images/zombie/cemetery-2.png
+images/zombie/cross.png
+images/zombie/target.png
+images/zombie/zombie-1.png
+images/zombie/zombie-2.png
+images/zombie/zombie-3.png
+
+images/cat/bg.png
+images/cat/cross.png
+images/cat/plate.png
+images/cat/cat-1.png
+images/cat/cat-2.png
+images/cat/cat-3.png
+
+sounds/cat/hit.ogg
+sounds/cat/fail.ogg
+sounds/cat/start.ogg
+
+sounds/zombie/hit.ogg
+sounds/zombie/fail.ogg
+sounds/zombie/start.ogg
 
 NETWORK:
 *
