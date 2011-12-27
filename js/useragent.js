@@ -7,24 +7,24 @@ energy.userAgent.STRING = goog.userAgent.getUserAgentString();
 energy.userAgent._detected = false;
 
 energy.userAgent.ANDROID = false;
-energy.userAgent.IPAD    = false;
-energy.userAgent.IPHONE  = false;
+energy.userAgent.IPAD = false;
+energy.userAgent.IPHONE = false;
 
 
 energy.userAgent.WINDOWS = false;
-energy.userAgent.LINUX   = false;
-energy.userAgent.MAC     = false;
-energy.userAgent.X11     = false;
+energy.userAgent.LINUX = false;
+energy.userAgent.MAC = false;
+energy.userAgent.X11 = false;
 
 energy.userAgent.FIREFOX = false;
-energy.userAgent.CHROME  = false;
-energy.userAgent.SAFARI  = false;
-energy.userAgent.OPERA   = false;
-energy.userAgent.IE      = false;
-energy.userAgent.CAMINO  = false;
+energy.userAgent.CHROME = false;
+energy.userAgent.SAFARI = false;
+energy.userAgent.OPERA = false;
+energy.userAgent.IE = false;
+energy.userAgent.CAMINO = false;
 
-energy.userAgent.GECKO   = false;
-energy.userAgent.WEBKIT  = false;
+energy.userAgent.GECKO = false;
+energy.userAgent.WEBKIT = false;
 
 
 energy.userAgent.detect = function() {

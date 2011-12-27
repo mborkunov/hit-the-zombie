@@ -1,14 +1,14 @@
 goog.provide('energy.zombie.Target');
 
 
+goog.require('energy.sound');
 goog.require('goog.dom');
 goog.require('goog.dom.classes');
-goog.require('goog.style');
 goog.require('goog.events');
+goog.require('goog.style');
 goog.require('goog.userAgent');
 goog.require('goog.userAgent.product');
 
-goog.require('energy.sound');
 
 /**
  * @constructor
@@ -20,6 +20,7 @@ energy.zombie.Target = function(game) {
 /**
  * @type {Element}
  */
+
 energy.zombie.Target.prototype.targetElement = null;
 
 /**
@@ -28,7 +29,7 @@ energy.zombie.Target.prototype.targetElement = null;
 energy.zombie.Target.prototype.game = null;
 
 /**
- * @type {number}
+ * @const @type {number}
  */
 energy.zombie.Target.angleIncrese = 15;
 
@@ -97,8 +98,7 @@ energy.zombie.Target.prototype.continueRotating = function() {
     }
     if (this.angle < 270 && this.angle + energy.zombie.Target.angleIncrese >= 270) {
       goog.dom.classes.add(this.targetElement, 'front target');
-      //goog.dom.classes.remove(this.targetElement, 'target');
-      for (var i = 1; i <=3; i++) {
+      for (var i = 1; i <= 3; i++) {
         goog.dom.classes.remove(this.targetElement, 'target-' + i);
       }
       goog.dom.classes.remove(this.targetElement, 'target-hit');
@@ -154,7 +154,7 @@ energy.zombie.Target.prototype.listener = function(e) {
   if (this.front) {
     className = 'shrink';
     score = Math.max(0, this.game.score - 5);
-    energy.sound.play("fail", 'ogg');
+    energy.sound.play('fail', 'ogg');
   } else {
     className = 'grow';
     this.rotate(1);
@@ -163,10 +163,10 @@ energy.zombie.Target.prototype.listener = function(e) {
     energy.sound.play('hit', 'ogg');
   }
 
-  if (score != this.score) {
+  if (score != this.game.score) {
     this.game.score = score;
     var scoreElement = goog.dom.getElement('score');
-    goog.dom.setTextContent(scoreElement, score);
+    goog.dom.setTextContent(scoreElement, score.toString());
     scoreElement.className = '';
     goog.dom.classes.add(scoreElement, className);
   }

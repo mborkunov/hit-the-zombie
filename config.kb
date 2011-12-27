@@ -1,0 +1,13 @@
+closure_path: ../closure-library
+inputs:
+  - js/zombie/game.js
+js_paths:
+  - js
+  - ../pl/src
+deps_path: js/deps.js
+compile_path: js/zombie.js
+externs: []
+fix_paths:
+  - js
+  - js/zombie
+  - ../pl/src

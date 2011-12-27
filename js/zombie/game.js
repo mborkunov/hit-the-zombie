@@ -1,22 +1,27 @@
 goog.provide('energy.zombie');
 goog.provide('energy.zombie.Game');
 
+goog.require('pl.Stats');
+goog.require('energy.theme');
+goog.require('energy.userAgent');
+goog.require('energy.zombie.Target');
+goog.require('goog.Timer');
 goog.require('goog.array');
 goog.require('goog.dom');
 goog.require('goog.dom.classes');
 goog.require('goog.style');
 goog.require('goog.userAgent.product');
 
-goog.require('goog.Timer');
-goog.require('energy.zombie.Target');
-goog.require('energy.userAgent');
-goog.require('energy.theme');
 
 /**
  * @constructor
  */
 energy.zombie.Game = function() {
-  window['applicationCache'].addEventListener("updateready", function() {
+  if (COMPILED) {
+     pl.Stats.addGoogleAnalytics('UA-26880279-1');
+  }
+
+  window['applicationCache'].addEventListener('updateready', function() {
     window['applicationCache']['swapCache']();
     window.location.reload();
   }, false);
@@ -46,9 +51,11 @@ energy.zombie.Game = function() {
     goog.events.listen(themeSwitcher, goog.events.EventType.MOUSEDOWN, this.themeSwitcherListener, true, this);
   }
 
+  var localStorage = window.localStorage || {setItem: function(){}, getItem: function(){}};
+
   if (localStorage) {
     if (localStorage.getItem('highscore')) {
-      this.highscore = parseInt(localStorage.getItem('highscore'));
+      this.highscore = parseInt(localStorage.getItem('highscore'), 10);
       this.showHighScore(this.highscore);
     }
   }
@@ -81,8 +88,8 @@ energy.zombie.Game = function() {
     goog.dom.classes.add(document.body, 'ie');
   }
 
-  if (energy.userAgent.CHROME)  {
-    if (!chrome['app']['isInstalled']) {
+  if (energy.userAgent.CHROME) {
+    if (!window['chrome']['app']['isInstalled']) {
       var installButton = goog.dom.getElement('install-button');
       if (installButton) {
         goog.style.setStyle(installButton, 'display', 'block');
@@ -145,7 +152,7 @@ energy.zombie.Game.prototype.overlay = null;
 
 energy.zombie.Game.prototype.install = function() {
   var link = goog.dom.getElement('chrome-link').getAttribute('href');
-  chrome['webstore']['install'](link, function() {
+  window['chrome']['webstore']['install'](link, function() {
     var installButton = goog.dom.getElement('install-button');
     if (installButton) {
       goog.style.setStyle(installButton, 'display', 'none');
@@ -185,7 +192,7 @@ energy.zombie.Game.prototype.draw = function() {
 
     goog.style.setStyle(targetContainer, {
       top: 120 * row + 25 + 'px',
-      left: (120 * col) + 100 +  'px'
+      left: (120 * col) + 100 + 'px'
     });
 
     target.draw(targetContainer);
@@ -197,7 +204,7 @@ energy.zombie.Game.prototype.update = function() {
   if (this.startTime != 0) {
     var sleeping = this.getSleepTargets();
     if (sleeping.length > 0) {
-      goog.array.forEach(sleeping, function(target) {
+      goog.array.forEach(sleeping, function(/**energy.zombie.Target*/target) {
         var extra = 0.02 * this.getProgress() / 100;
         var probability = (target.front ? 0.005 : .0007) + extra;
         if (!target.front && (new Date().getTime() - target.stopTime) < 500) {
@@ -212,7 +219,7 @@ energy.zombie.Game.prototype.update = function() {
     var timeLeft = this.getTimeLeft();
     if (this.timeLeft != timeLeft) {
       this.timeLeft = timeLeft;
-      goog.dom.setTextContent(this.timerElement, Math.max(0, this.roundTime - this.timeLeft));
+      goog.dom.setTextContent(this.timerElement, Math.max(0, this.roundTime - this.timeLeft).toString());
     }
   } else {
     // close targets
@@ -300,6 +307,7 @@ energy.zombie.Game.prototype.themeSwitcherListener = function(e) {
 
 energy.zombie.Game.prototype.setHighScore = function(newHighscore) {
   this.highscore = newHighscore;
+  var localStorage = window.localStorage || {setItem: function(){}, getItem: function(){}};
   localStorage.setItem('highscore', this.highscore);
   this.showHighScore(this.highscore);
 };
@@ -352,7 +360,7 @@ window.onload = function() {
   function fail() {return false;}
   document.oncontextmenu = fail;
   document.onmousedown = fail;
-  document.ontouchmove = function(e){
+  document.ontouchmove = function(e) {
      e.preventDefault();
   }
 };

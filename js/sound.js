@@ -1,13 +1,23 @@
 goog.provide('energy.sound');
 
-goog.require('goog.events');
 goog.require('energy.theme');
+goog.require('goog.events');
 
 energy.sound.initialized = false;
 energy.sound.enabled = true;
 energy.sound._buffers = {};
+
+
+/**
+ * @type {Object}
+ */
 energy.sound.ctx = null;
 
+/**
+ *
+ * @param name {string}
+ * @param format
+ */
 energy.sound.play = function(name, format) {
   if (!energy.sound.isEnabled()) return;
   format = format || 'wav';
@@ -24,6 +34,7 @@ energy.sound.play = function(name, format) {
         energy.sound._buffers[energy.theme.current][name] = buffer;
         energy.sound._playBuffer(buffer);
       }, function() {
+        var console = window.console || {error: function(){}};
         console.error('Cannot load sound buffer', arguments);
         energy.sound._buffers[energy.theme.current][name] = null;
       });
@@ -47,6 +58,7 @@ energy.sound.isEnabled = function() {
 };
 
 energy.sound.setEnabled = function(enabled) {
+  var localStorage = window.localStorage || {setItem: function(){}, getItem: function(){}};
   localStorage.setItem('sound', enabled);
   energy.sound.enabled = enabled;
 };
@@ -55,6 +67,7 @@ energy.sound.setEnabled = function(enabled) {
 energy.sound.init = function() {
   try {
     energy.sound.ctx = new window['webkitAudioContext']();
+    var localStorage = window.localStorage || {setItem: function(){}, getItem: function(){}};
     energy.sound.enabled = (!(localStorage.getItem('sound') != null && localStorage.getItem('sound') == 'false'));
   } catch (ignored) {}
 };
