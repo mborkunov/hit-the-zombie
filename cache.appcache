@@ -1,7 +1,7 @@
 CACHE MANIFEST
 
 CACHE:
-#r37
+#r40
 favicon.ico
 zombie.js
 styles/styles.css
@@ -10,6 +10,7 @@ images/alpha.png
 images/draft.png
 images/sound-on.png
 images/sound-off.png
+images/market.png
 
 images/zombie/cemetery-2.png
 images/zombie/cross.png
