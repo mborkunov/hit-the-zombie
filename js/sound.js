@@ -69,7 +69,9 @@ energy.sound.init = function() {
     energy.sound.ctx = new window['webkitAudioContext']();
     var localStorage = window.localStorage || {setItem: function(){}, getItem: function(){}};
     energy.sound.enabled = (!(localStorage.getItem('sound') != null && localStorage.getItem('sound') == 'false'));
-  } catch (ignored) {}
+  } catch (ignored) {
+    energy.sound.enabled = false;
+  }
 };
 
 if (!energy.sound.initialized) {

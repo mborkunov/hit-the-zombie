@@ -6,6 +6,9 @@ body.zombie {
       display: block !important;
     }
   }
+  &.ie {
+    filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='#012212', endColorstr='#000600')";
+  }
   &.gecko {
     background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#012212, #000600);
   }

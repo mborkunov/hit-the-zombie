@@ -21,10 +21,13 @@ energy.zombie.Game = function() {
      pl.Stats.addGoogleAnalytics('UA-26880279-1');
   }
 
-  window['applicationCache'].addEventListener('updateready', function() {
-    window['applicationCache']['swapCache']();
-    window.location.reload();
-  }, false);
+  if (goog.isDef(window['applicationCache']) && goog.isDef(window['applicationCache']['addEventListener'])) {
+    window['applicationCache'].addEventListener('updateready', function() {
+      window['applicationCache']['swapCache']();
+      window.location.reload();
+    }, false);
+  }
+
 
   energy.zombie.Game.prototype.container = goog.dom.getElement('game-container');
   energy.theme.init();

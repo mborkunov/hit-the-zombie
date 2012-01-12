@@ -6,13 +6,15 @@ body.cat {
       display: block !important;
     }
   }
+  &.ie {
+    filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f1a1c', endColorstr='#000600')";
+  }
   &.gecko {
     background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -moz-linear-gradient(#4f1a1c, #000600);
   }
   &.opera {
     background: -o-linear-gradient(#4f1a1c, #000600);
   }
-
 
   #game-container {
     border: 1px solid #401f1f;

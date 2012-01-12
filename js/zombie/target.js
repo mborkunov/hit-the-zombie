@@ -111,7 +111,7 @@ energy.zombie.Target.prototype.continueRotating = function() {
     } else if (goog.userAgent.GECKO) {
       goog.style.setStyle(this.targetElement, '-moz-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
     } else if (goog.userAgent.IE) {
-      goog.style.setStyle(this.targetElement, '-ms-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
+      goog.style.setStyle(this.targetElement, 'msTransform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
     } else {
       goog.style.setStyle(this.targetElement, '-o-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
     }

@@ -1,0 +1,2 @@
+"https://accounts.google.com/o/oauth2/auth?response_type=token&client_id=553794839019.apps.googleusercontent.com&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&state=0&approval_prompt=auto"
+"https://www.googleapis.com/plus/v1/people/103872869195911303484?access_token=ya29.AHES6ZSxmSSayY33Q4DVEroJaDouc-UEX8pk0U3mcwBoiJM2iFJKTw&"

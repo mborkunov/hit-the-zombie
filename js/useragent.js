@@ -55,6 +55,9 @@ energy.userAgent.detect = function() {
   if (goog.userAgent.GECKO) {
     energy.userAgent.GECKO = true;
   }
+  if (goog.userAgent.IE) {
+      energy.userAgent.IE = true;
+    }
 
   if (ua.indexOf('WebKit') != -1) {
     energy.userAgent.WEBKIT = true;
