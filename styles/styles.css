@@ -10,6 +10,10 @@ body.cat.webkit #sound {
   display: block !important;
 }
 
+body.cat.ie {
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4f1a1c', endColorstr = '#000600');
+}
+
 body.cat.gecko {
   background: url('../images/alpha.png') 0 0 no-repeat, url('../images/bg.png'), -moz-linear-gradient(#4f1a1c, #000600);
 }
@@ -116,6 +120,10 @@ body.zombie.webkit {
 
 body.zombie.webkit #sound {
   display: block !important;
+}
+
+body.zombie.ie {
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#012212', endColorstr = '#000600');
 }
 
 body.zombie.gecko {
@@ -347,9 +355,10 @@ body #game-container #sound {
   position: absolute;
   bottom: 0px;
   left: 10px;
-  width: 128px;
-  height: 128px;
+  width: 118px;
+  height: 118px;
   z-index: 11;
+  cursor: pointer;
 }
 
 body #game-container #sound.on {
@@ -429,6 +438,10 @@ body #game-container .target-container .target {
   border: 2px solid #000;
   border-radius: 50px;
   background: #fff;
+  cursor: pointer;
+}
+
+body #theme {
   cursor: pointer;
 }
 

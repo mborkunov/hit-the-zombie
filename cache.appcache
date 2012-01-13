@@ -1,9 +1,9 @@
 CACHE MANIFEST
 
 CACHE:
-#r40
+#r44
 favicon.ico
-zombie.js
+js/zombie.js
 styles/styles.css
 images/bg.png
 images/alpha.png

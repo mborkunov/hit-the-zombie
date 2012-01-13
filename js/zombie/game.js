@@ -28,6 +28,12 @@ energy.zombie.Game = function() {
     }, false);
   }
 
+  this.addElement('timer');
+  this.addElement('score');
+  this.addElement('highscore');
+  this.addElement('sound');
+  this.addElement('theme');
+  this.addElement('overlay');
 
   energy.zombie.Game.prototype.container = goog.dom.getElement('game-container');
   energy.theme.init();
@@ -100,6 +106,12 @@ energy.zombie.Game = function() {
       }
     }
   }
+};
+
+energy.zombie.Game.prototype.addElement = function(id) {
+  var element = goog.dom.createElement('div');
+  element.setAttribute('id', id);
+  goog.dom.getElement('game-container').appendChild(element);
 };
 
 /**
