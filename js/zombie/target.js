@@ -165,7 +165,7 @@ energy.zombie.Target.prototype.listener = function(e) {
 
   if (score != this.game.score) {
     this.game.score = score;
-    var scoreElement = goog.dom.getElement('score');
+    var scoreElement = goog.dom.getElementByClass('score');
     goog.dom.setTextContent(scoreElement, score.toString());
     scoreElement.className = '';
     goog.dom.classes.add(scoreElement, className);

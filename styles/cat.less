@@ -16,7 +16,7 @@ body.cat {
     background: -o-linear-gradient(#4f1a1c, #000600);
   }
 
-  #game-container {
+  .game-container {
     border: 1px solid #401f1f;
     background: #2f1211 url('../images/cat/bg.png');
     .target {
@@ -45,58 +45,62 @@ body.cat {
       }
     }
 
-    #start {
-        background-color: #3a1d1c;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#3a1d1c), to(#2f1211));
+    .start {
+      background-color: #3a1d1c;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#3a1d1c), to(#2f1211));
+      /* Saf4+, Chrome */
+      background-image: -webkit-linear-gradient(top, #3a1d1c, #2f1211);
+      background-image: -moz-linear-gradient(top, #3a1d1c, #2f1211);
+      background-image: -ms-linear-gradient(top, #3a1d1c, #2f1211);
+      background-image: -o-linear-gradient(top, #3a1d1c, #2f1211);
+      background-image: linear-gradient(top, #3a1d1c, #2f1211);
+      border: 1px solid #0e1212;
+      border-bottom: 1px solid #0e1212;
+      -webkit-box-shadow: inset 0 1px 0 0 #3a1d1c;
+      -moz-box-shadow: inset 0 1px 0 0 #3a1d1c;
+      -ms-box-shadow: inset 0 1px 0 0 #3a1d1c;
+      -o-box-shadow: inset 0 1px 0 0 #3a1d1c;
+      box-shadow: inset 0 1px 0 0 #3a1d1c;
+      text-shadow: 0 -1px 0 #4c9021;
+      &:hover {
+        background-color: #2f1211;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#2f1211), to(#3a1d1c));
         /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient(top, #3a1d1c, #2f1211);
-        background-image: -moz-linear-gradient(top, #3a1d1c, #2f1211);
-        background-image: -ms-linear-gradient(top, #3a1d1c, #2f1211);
-        background-image: -o-linear-gradient(top, #3a1d1c, #2f1211);
-        background-image: linear-gradient(top, #3a1d1c, #2f1211);
-        border: 1px solid #0e1212;
-        border-bottom: 1px solid #0e1212;
+        background-image: -webkit-linear-gradient(top, #2f1211, #3a1d1c);
+        background-image: -moz-linear-gradient(top, #2f1211, #3a1d1c);
+        background-image: -ms-linear-gradient(top, #2f1211, #3a1d1c);
+        background-image: -o-linear-gradient(top, #2f1211, #3a1d1c);
+        background-image: linear-gradient(top, #2f1211, #3a1d1c);
         -webkit-box-shadow: inset 0 1px 0 0 #3a1d1c;
         -moz-box-shadow: inset 0 1px 0 0 #3a1d1c;
         -ms-box-shadow: inset 0 1px 0 0 #3a1d1c;
         -o-box-shadow: inset 0 1px 0 0 #3a1d1c;
         box-shadow: inset 0 1px 0 0 #3a1d1c;
-        text-shadow: 0 -1px 0 #4c9021;
-        &:hover {
-          background-color: #2f1211;
-          background-image: -webkit-gradient(linear, left top, left bottom, from(#2f1211), to(#3a1d1c));
-          /* Saf4+, Chrome */
-          background-image: -webkit-linear-gradient(top, #2f1211, #3a1d1c);
-          background-image: -moz-linear-gradient(top, #2f1211, #3a1d1c);
-          background-image: -ms-linear-gradient(top, #2f1211, #3a1d1c);
-          background-image: -o-linear-gradient(top, #2f1211, #3a1d1c);
-          background-image: linear-gradient(top, #2f1211, #3a1d1c);
-          -webkit-box-shadow: inset 0 1px 0 0 #3a1d1c;
-          -moz-box-shadow: inset 0 1px 0 0 #3a1d1c;
-          -ms-box-shadow: inset 0 1px 0 0 #3a1d1c;
-          -o-box-shadow: inset 0 1px 0 0 #3a1d1c;
-          box-shadow: inset 0 1px 0 0 #3a1d1c;
-        }
-        &:active {
-          border: 1px solid #231211;
-          border-bottom: 1px solid #231211;
-          -webkit-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
-          -moz-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
-          -ms-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
-          -o-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
-          box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
-        }
       }
+      &:active {
+        border: 1px solid #231211;
+        border-bottom: 1px solid #231211;
+        -webkit-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
+        -moz-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
+        -ms-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
+        -o-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
+        box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
+      }
+    }
 
-      #score {
-        text-shadow: #fff 0px 0px 10px;
-      }
-      #score.shrink {
-        color: #1f1f1f;
-      }
+    .score {
+      text-shadow: #fff 0px 0px 10px;
+    }
+    .score.shrink {
+      color: #1f1f1f;
+    }
 
-      #score.grow {
-        color: #812d2e;
-      }
+    .score.grow {
+      color: #812d2e;
+    }
+  }
+  .theme {
+    border: 3px solid #d49299;
+    background: #000 url('../images/cat/icon.png') 5px 5px no-repeat;
   }
 }

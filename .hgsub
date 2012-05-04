@@ -1,1 +1,2 @@
 third_party/closure-library = [svn]http://closure-library.googlecode.com/svn/trunk/
+third_party/pl = [git]https://github.com/thinkpixellab/pl.git

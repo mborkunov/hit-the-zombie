@@ -15,6 +15,7 @@ energy.theme.defaultTheme = energy.theme.list[0];
  */
 energy.theme.current = energy.theme.defaultTheme;
 
+
 energy.theme.init = function() {
   var localStorage = window.localStorage || {setItem: function(){}, getItem: function(){}};
   if (localStorage) {

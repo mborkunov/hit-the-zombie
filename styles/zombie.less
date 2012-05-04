@@ -2,7 +2,7 @@ body.zombie {
   background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
   &.webkit {
     background: url('../images/alpha.png') 0 0 no-repeat,  url('../images/bg.png'), -webkit-linear-gradient(#012212, #000600);
-    #sound {
+    .sound {
       display: block !important;
     }
   }
@@ -16,7 +16,7 @@ body.zombie {
     background: -o-linear-gradient(#012212, #000600);
   }
 
-  #game-container {
+  .game-container {
     background: #012212 url('../images/zombie/cemetery-2.png') no-repeat;
     .target {
       &.front {
@@ -44,7 +44,7 @@ body.zombie {
       }
     }
 
-    #start {
+    .start {
       background-color: #0d4319;
       background-image: -webkit-gradient(linear, left top, left bottom, from(#0d4319), to(#07150e));
       /* Saf4+, Chrome */
@@ -87,12 +87,16 @@ body.zombie {
       }
     }
 
-    #score.shrink {
+    .score.shrink {
       color: red;
     }
 
-    #score.grow {
+    .score.grow {
       color: green;
     }
+  }
+  .theme {
+    border: 3px solid #0c3f18;
+    background: url('../images/zombie/icon.png') 2px 3px no-repeat;
   }
 }

@@ -28,6 +28,8 @@ energy.zombie.Game = function() {
     }, false);
   }
 
+  this.container = goog.dom.getElementByClass('game-container');
+
   this.addElement('timer');
   this.addElement('score');
   this.addElement('highscore');
@@ -35,7 +37,6 @@ energy.zombie.Game = function() {
   this.addElement('theme');
   this.addElement('overlay');
 
-  energy.zombie.Game.prototype.container = goog.dom.getElement('game-container');
   energy.theme.init();
 
   for (var i = 0; i < 15; i++) {
@@ -43,19 +44,19 @@ energy.zombie.Game = function() {
   }
   this.draw();
 
-  this.soundButton = goog.dom.getElement('sound');
+  this.soundButton = goog.dom.getElementByClass('sound');
   if (this.soundButton) {
     goog.events.listen(this.soundButton, goog.events.EventType.MOUSEDOWN, this.soundListener, true, this);
     goog.dom.classes.add(this.soundButton, energy.sound.isEnabled() ? 'on' : 'off');
   }
 
-  this.startButton = goog.dom.getElement('start');
+  this.startButton = goog.dom.getElementByClass('start');
   goog.dom.setTextContent(this.startButton, 'Start');
-  this.overlay = goog.dom.getElement('overlay');
-  this.timerElement = goog.dom.getElement('timer');
+  this.overlay = goog.dom.getElementByClass('overlay');
+  this.timerElement = goog.dom.getElementByClass('timer');
   goog.events.listen(this.startButton, goog.events.EventType.MOUSEUP, this.startListener, true, this);
 
-  var themeSwitcher = goog.dom.getElement('theme');
+  var themeSwitcher = goog.dom.getElementByClass('theme');
   if (themeSwitcher) {
     goog.events.listen(themeSwitcher, goog.events.EventType.MOUSEDOWN, this.themeSwitcherListener, true, this);
   }
@@ -97,21 +98,19 @@ energy.zombie.Game = function() {
     goog.dom.classes.add(document.body, 'ie');
   }
 
-  if (energy.userAgent.CHROME) {
-    if (!window['chrome']['app']['isInstalled']) {
-      var installButton = goog.dom.getElement('install-button');
-      if (installButton) {
-        goog.style.setStyle(installButton, 'display', 'block');
-        goog.events.listen(installButton, goog.events.EventType.MOUSEDOWN, this.install, true, this);
-      }
+  if (energy.userAgent.CHROME && !window['chrome']['app']['isInstalled']) {
+    var installButton = goog.dom.getElementByClass('install-button');
+    if (installButton) {
+      goog.style.setStyle(installButton, 'display', 'block');
+      goog.events.listen(installButton, goog.events.EventType.MOUSEDOWN, this.install, true, this);
     }
   }
 };
 
-energy.zombie.Game.prototype.addElement = function(id) {
+energy.zombie.Game.prototype.addElement = function(cls) {
   var element = goog.dom.createElement('div');
-  element.setAttribute('id', id);
-  goog.dom.getElement('game-container').appendChild(element);
+  element.setAttribute('class', cls);
+  this.container.appendChild(element);
 };
 
 /**
@@ -168,7 +167,7 @@ energy.zombie.Game.prototype.overlay = null;
 energy.zombie.Game.prototype.install = function() {
   var link = goog.dom.getElement('chrome-link').getAttribute('href');
   window['chrome']['webstore']['install'](link, function() {
-    var installButton = goog.dom.getElement('install-button');
+    var installButton = goog.dom.getElementByClass('install-button');
     if (installButton) {
       goog.style.setStyle(installButton, 'display', 'none');
     }
@@ -180,7 +179,7 @@ energy.zombie.Game.prototype.start = function() {
   clearInterval(this.updateInterval);
   this.update();
   this.score = 0;
-  var scoreElement = goog.dom.getElement('score');
+  var scoreElement = goog.dom.getElementByClass('score');
   goog.dom.setTextContent(scoreElement, '');
 
   this.updateInterval = setInterval(goog.bind(this.update, this), 20);
@@ -328,7 +327,7 @@ energy.zombie.Game.prototype.setHighScore = function(newHighscore) {
 };
 
 energy.zombie.Game.prototype.showHighScore = function(highscore) {
-  var highScoreElement = goog.dom.getElement('highscore');
+  var highScoreElement = goog.dom.getElementByClass('highscore');
   goog.dom.setTextContent(highScoreElement, 'Highscore: ' + this.highscore);
 };
 

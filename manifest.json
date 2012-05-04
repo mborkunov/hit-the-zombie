@@ -1,13 +1,13 @@
 {
   "name": "Hit the Zombie",
   "description": "Zombie shooter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "app": {
     "urls": [
-      "http://energy.jelastic.com/zombie/"
+      "http://maxim-borkunov.com/zombie/"
     ],
     "launch": {
-      "web_url": "http://energy.jelastic.com/zombie/"
+      "web_url": "http://maxim-borkunov.com/zombie/"
     }
   },
   "icons": {

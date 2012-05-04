@@ -12,7 +12,7 @@ html, body {
   height: 100%;
 }
 
-#author {
+.author {
   color: #fff;
   display: block;
   width: 110px;
@@ -37,7 +37,7 @@ body {
       text-shadow: none !important;
       -webkit-box-shadow: none !important;
     }
-    #game-container {
+    .game-container {
       width: 1024px !important;
       height: 768px !important;
       top: 0;
@@ -51,7 +51,7 @@ body {
       text-shadow: none !important;
       -webkit-box-shadow: none !important;
     }
-    #game-container {
+    .game-container {
       width: 100% !important;
       height: 100% !important;
       position: relative;
@@ -61,7 +61,7 @@ body {
     }
   }
 
-  #install-button {
+  .install-button {
     position: absolute;
     bottom: 20px;
     right: 20px;
@@ -96,7 +96,7 @@ body {
     }
   }
 
-  #game-container {
+  .game-container {
     border: 1px solid #222;
     position: absolute;
     z-index: 2;
@@ -113,7 +113,7 @@ body {
     left: 50%;
     margin: -300px 0 0 -400px;
 
-    #overlay {
+    .overlay {
       position: absolute;
       z-index: 10;
       width: 100%;
@@ -123,7 +123,7 @@ body {
       background: rgba(0, 0, 0, .4);
     }
 
-    #score {
+    .score {
       font-size: 100px;
       font-weight: normal;
       color: yellow;
@@ -132,7 +132,7 @@ body {
       z-index: 9;
     }
 
-    #sound {
+    .sound {
       display: none;
       position: absolute;
       bottom: 0px;
@@ -149,7 +149,7 @@ body {
       }
     }
 
-    #theme {
+    .theme {
       position: absolute;
       bottom: 10px;
       right: 10px;
@@ -161,7 +161,7 @@ body {
       z-index: 11;
     }
 
-    #highscore {
+    .highscore {
       font-size: 25px;
       color: yellow;
       text-align: left;
@@ -171,7 +171,7 @@ body {
       top: 5px;
       left: 15px;
     }
-    #timer {
+    .timer {
       position: absolute;
       top: 10px;
       right: 20px;
@@ -182,7 +182,7 @@ body {
       z-index: 9;
     }
 
-    #start {
+    .start {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -221,16 +221,8 @@ body {
     }
   }
 
-  #theme {
+  .theme {
     cursor: pointer;
   }
 
-  &.zombie #theme {
-    border: 3px solid #0c3f18;
-    background: url('../images/zombie/icon.png') 2px 3px no-repeat;
-  }
-  &.cat #theme {
-    border: 3px solid #d49299;
-    background: url('../images/cat/icon.png') 5px 5px no-repeat;
-  }
 }
