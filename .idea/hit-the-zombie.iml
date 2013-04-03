@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Google Closure" level="application" />
     <orderEntry type="library" name="PL" level="application" />
+    <orderEntry type="library" name="HTML Web Audio API" level="application" />
   </component>
 </module>
 

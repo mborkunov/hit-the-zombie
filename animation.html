@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Experiment</title>
+    <style type="text/css">
+        body {
+            background: #dedede;
+        }
+
+        .coin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            border: .2em solid black;
+            margin: -150px 0 0 -150px;
+            border-radius: 150px;
+            background: #fff;
+            /*-webkit-transition: all;*//* cubic-bezier(-.01, .59, .26, .98);*/
+            /*-webkit-animation-timing-function:  linear;
+            -webkit-animation-duration:  5s;*/
+            -webkit-animation: flip 1s linear infinite;
+        }
+
+        @-webkit-keyframes flip {
+            0%, 100% {-webkit-transform: scale(1, 1)}
+            50% {-webkit-transform: scale(0, 1)}
+        }
+
+
+        .container {
+          width: 250px;
+          height: 250px;
+          overflow: hidden;
+          background: blue;
+          position: absolute;
+          border-radius: 125px;
+        }
+
+
+      .outer-circle {
+        width: 96px;
+        height: 96px;
+        left: 150px;
+        top: 150px;
+        position: absolute;
+        background: #DEDEDE;
+        padding: 2px;
+        border-radius: 50px;
+        overflow: hidden;
+        border: 1px solid transparent;
+      }
+
+      .arc {
+        width: 100px;
+        height: 100px;
+        background: green;
+        position: absolute;
+        top: -55px;
+        border-radius: 50px;
+        -webkit-transition: all 2s ease-out;
+        transition: all 2s ease-out;
+        left: 1px;
+      }
+
+        .outer-circle:hover {
+          border-radius: 50px;
+
+        }
+
+      .outer-circle:hover .arc {
+        top: -150px;
+      }
+
+      .inner-circle {
+        width: 96px;
+        height: 96px;
+        background: #DEDEDE;
+        border-radius: 49px;
+        position: absolute;
+        top: 2px;
+      }
+
+    </style>
+</head>
+<body>
+
+
+<div class="outer-circle">
+  <div class="arc">
+  </div>
+  <div class="inner-circle"></div>
+</div>
+
+
+<!--<div class="coin"></div>-->
+</body>
+</html>

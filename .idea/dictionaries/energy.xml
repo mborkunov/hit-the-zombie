@@ -1,7 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="energy">
     <words>
+      <w>arraybuffer</w>
       <w>externs</w>
+      <w>mousedown</w>
+      <w>onload</w>
+      <w>ontouchmove</w>
       <w>plusone</w>
     </words>
   </dictionary>
