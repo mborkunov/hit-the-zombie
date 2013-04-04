@@ -76,7 +76,7 @@
   };
 
   Game.prototype.start = function() {
-    this.startTime = new Date().getTime();
+    this.startTime = Date.now();
     clearInterval(this.updateInterval);
     this.update();
     this.score = 0;
@@ -126,11 +126,8 @@
       this.getSleepTargets().forEach(function(target) {
         var extra = 0.02 * self.getProgress() / 100;
         var probability = (target.front ? 0.005 : 0.0007) + extra;
-        if (!target.front && (new Date().getTime() - target.stopTime) < 1000) {
-          return;
-        }
-        if (Math.random() < probability) {
-          target.rotate(Math.round(Math.random() * 5));
+        if (target.front && Math.random() < probability) {
+          target.flipRandomly(true);
         }
       });
 
@@ -229,21 +226,43 @@
     this.game = game;
     this.targetElement = null;
     this.turns = 0;
-    this.stopTime = 0;
     this.currentTurn = 0;
     this.front = true;
     this.rotating = false;
     this.angle = 0;
+    this.started = 0;
 
     this.clickListener = this.listener.bind(this);
   }
 
+  Target.targetDelay = 2000;
   Target.angleIncrease = 5;
 
   Target.prototype.update = function () {
     if (this.rotating) {
       this.continueRotating();
+    } else {
+      if (!this.front) {
+        if (this.started === 0) {
+          this.started = Date.now();
+          this.remainingElement.style.setProperty('display', 'block', null);
+        }
+        if (Date.now() - this.started > Target.targetDelay) {
+          this.hideRemaining();
+          this.started = 0;
+          this.rotate(1);
+        } else {
+          var scaleX = (1 - (Date.now() - this.started) / Target.targetDelay).toFixed(2);
+          this.remainingElement.style.setProperty('transform', 'scale(' + scaleX + ', 1)', null);
+          this.remainingElement.style.setProperty('-webkit-transform', 'scale(' + scaleX + ', 1)', null);
+        }
+      }
     }
+  };
+
+  Target.prototype.flipRandomly = function(even) {
+    var flips = Math.round(Math.random() * 5);
+    this.rotate(flips % 2 === (even ? 1 : 0) ? flips : flips + 1);
   };
 
   Target.prototype.continueRotating = function () {
@@ -254,14 +273,13 @@
     if (this.angle % 180 === 0) {
       this.currentTurn++;
       if (this.currentTurn > this.turns) {
-        this.stopTime = new Date().getTime();
         this.rotating = false;
       }
     }
 
-    var className = this.targetElement.className;
 
     if (this.currentTurn <= this.turns) {
+      var className = this.targetElement.className;
       if (this.angle < 90 && this.angle + Target.angleIncrease >= 90) {
         className = className.replace('front', '');
         className = className.replace('target-hit', '');
@@ -280,12 +298,11 @@
       }
       this.targetElement.className = className.trim();
       if ('opera' in window) {
-        this.targetElement.style.setProperty('-o-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)', null);
+        this.targetElement.style.setProperty('-o-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180).toFixed(2) + ', 1)', null);
       } else if ('WebkitTransform' in document.documentElement.style) {
         this.targetElement.style.setProperty('-webkit-transform', 'rotateY(' + this.angle + 'deg)', null);
       } else if ('MozTransform' in document.documentElement.style) { // || goog.userAgent.GECKO
-        this.targetElement.style.setProperty('-moz-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)', null);
-
+        this.targetElement.style.setProperty('-moz-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180).toFixed(2) + ', 1)', null);
       /*
         goog.style.setStyle(this.targetElement, 'msTransform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
       } else {
@@ -294,6 +311,13 @@
 
       this.angle += Target.angleIncrease;
     }
+  };
+
+  Target.prototype.hideRemaining = function() {
+    this.remainingElement.style.removeProperty('transform');
+    this.remainingElement.style.removeProperty('-webkit-transform');
+    this.remainingElement.style.removeProperty('-moz-transform');
+    this.remainingElement.style.setProperty('display', 'none', null);
   };
 
   Target.prototype.listen = function() {
@@ -338,6 +362,7 @@
       this.targetElement.className += ' target-hit';
       this.game.multiplier.hit();
       Sound.play('hit', 'ogg');
+      this.hideRemaining();
     }
 
     if (score !== this.game.score) {
@@ -392,7 +417,6 @@
       this.progress -= 0.1;
     }
     this.setProgress(this.progress);
-
   };
 
   Multiplier.prototype.updateText = function() {

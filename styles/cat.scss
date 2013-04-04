@@ -15,6 +15,10 @@ body.cat {
         background: url('../images/cat/plate.png') 0 0 no-repeat;
       }
 
+      .remaining {
+        background: #b03500;
+      }
+
       @for $i from 1 through 3 {
         &.target-#{$i} {
           background: #fff url('../images/cat/cat-#{$i}.png') 10px 10px no-repeat;

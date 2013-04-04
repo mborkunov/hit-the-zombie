@@ -9,6 +9,8 @@ body.cat {
     background: #2f1211 url("../images/cat/bg.png"); }
     body.cat .game-container .target.front {
       background: url("../images/cat/plate.png") 0 0 no-repeat; }
+    body.cat .game-container .target .remaining {
+      background: #b03500; }
     body.cat .game-container .target.target-1 {
       background: white url("../images/cat/cat-1.png") 10px 10px no-repeat; }
       body.cat .game-container .target.target-1.target-hit {
@@ -79,7 +81,7 @@ body.zombie {
     body.zombie .game-container .target.front {
       background: white url("../images/zombie/target.png") 0 0 no-repeat; }
     body.zombie .game-container .target .remaining {
-      background: #f44; }
+      background: #d30000; }
     body.zombie .game-container .target.target-1 {
       background: white url("../images/zombie/zombie-1.png") 15px 10px no-repeat; }
       body.zombie .game-container .target.target-1.target-hit {
@@ -265,11 +267,16 @@ body {
       display: none;
       position: absolute;
       bottom: 0px;
-      left: 10px;
+      left: 0;
       width: 118px;
       height: 118px;
       z-index: 11;
-      cursor: pointer; }
+      cursor: pointer;
+      -webkit-transform: scale(0.5);
+      -moz-transform: scale(0.5);
+      -ms-transform: scale(0.5);
+      -o-transform: scale(0.5);
+      transform: scale(0.5); }
       body .game-container .sound.on {
         background: transparent url("../images/sound-on.png") 0 0 no-repeat; }
       body .game-container .sound.off {
@@ -336,9 +343,8 @@ body {
       background-color: #fff;
       cursor: pointer; }
       body .game-container .target.front .remaining {
-        display: none; }
+        display: none !important; }
       body .game-container .target .remaining {
-        display: none;
         width: 40px;
         height: 3px;
         position: absolute;

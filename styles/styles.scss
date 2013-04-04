@@ -137,11 +137,12 @@ body {
       display: none;
       position: absolute;
       bottom: 0px;
-      left: 10px;
+      left: 0;
       width: 118px;
       height: 118px;
       z-index: 11;
       cursor: pointer;
+      @include transform(scale(.5));
       &.on {
         background: transparent url('../images/sound-on.png') 0 0 no-repeat;
       }
@@ -211,11 +212,10 @@ body {
       cursor: pointer;
 
       &.front .remaining {
-        display: none;
+        display: none !important;
       }
 
       .remaining {
-        display: none;
         width: 40px;
         height: 3px;
         position: absolute;
