@@ -81,7 +81,7 @@ body.zombie {
     body.zombie .game-container .target.front {
       background: white url("../images/zombie/target.png") 0 0 no-repeat; }
     body.zombie .game-container .target .remaining {
-      background: #d30000; }
+      background: #f00; }
     body.zombie .game-container .target.target-1 {
       background: white url("../images/zombie/zombie-1.png") 15px 10px no-repeat; }
       body.zombie .game-container .target.target-1.target-hit {

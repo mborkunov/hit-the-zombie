@@ -431,7 +431,8 @@
   };
 
   Multiplier.prototype.setProgress = function(progress) {
-    this.progressElement.style.setProperty('width', progress + '%', null);
+    this.progress = progress;
+    this.progressElement.style.setProperty('width', this.progress + '%', null);
   };
 
   var Theme = {
