@@ -41,7 +41,7 @@ body {
     div, button {
       @include box-shadow(none);
     }
-    .game-container {
+    #container {
       width: 1024px !important;
       height: 768px !important;
       top: 0;
@@ -53,7 +53,7 @@ body {
     div, button {
       @include box-shadow(none);
     }
-    .game-container {
+    #container {
       width: 100% !important;
       height: 100% !important;
       position: relative;
@@ -96,7 +96,7 @@ body {
     border: 1px solid #222;
     position: absolute;
     z-index: 2;
-    @include box-shadow(0 0 10px #000 outset);
+    @include box-shadow(0 0 10px #000);
     overflow: hidden;
 
     position: absolute;

@@ -408,7 +408,7 @@ class Theme {
 class Sound {
 
   static bool _initialized = false;
-  static bool _enabled;
+  static bool _enabled = true;
 
   static bool get enabled => _enabled;
 
@@ -426,7 +426,9 @@ class Sound {
       _initialized = true;
       try {
         _ctx = new AudioContext();
-        _enabled = window.localStorage.containsKey('sound') && window.localStorage['sound'] == 'true';
+        if (window.localStorage.containsKey('sound')) {
+          _enabled = window.localStorage['sound'] == 'true';
+        }
       } catch (e) {
         print(e);
         return false;

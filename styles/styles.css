@@ -175,7 +175,7 @@ body {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none; }
-  body.ipad .game-container {
+  body.ipad #container {
     width: 1024px !important;
     height: 768px !important;
     top: 0;
@@ -185,7 +185,7 @@ body {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none; }
-  body.android .game-container {
+  body.android #container {
     width: 100% !important;
     height: 100% !important;
     position: relative;
@@ -235,9 +235,9 @@ body {
     border: 1px solid #222;
     position: absolute;
     z-index: 2;
-    -webkit-box-shadow: 0 0 10px black outset;
-    -moz-box-shadow: 0 0 10px black outset;
-    box-shadow: 0 0 10px black outset;
+    -webkit-box-shadow: 0 0 10px black;
+    -moz-box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
     overflow: hidden;
     position: absolute;
     width: 800px;
