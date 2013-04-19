@@ -224,8 +224,8 @@ class Target {
           stopwatch.reset();
           stopwatch.start();
           remainingElement.style.display = 'block';
-        }
-        if (stopwatch.elapsedMilliseconds > TARGET_DELAY) {
+        } else if (stopwatch.elapsedMilliseconds > TARGET_DELAY) {
+          String display = remainingElement.style.display;
           hideRemaining();
           stopwatch.stop();
           rotate(1);
@@ -260,6 +260,7 @@ class Target {
         Sound.play('hit');
         hideRemaining();
       }
+      stopwatch.stop();
 
       if (score != game.score) {
         game.score = score;
@@ -309,7 +310,7 @@ class Target {
   }
 
   void flipRandomly(bool even) {
-    int flips = (new math.Random().nextDouble() * 5).round();
+    int flips = (new math.Random().nextDouble() * 3).round();
     this.rotate(flips % 2 === (even ? 1 : 0) ? flips : flips + 1);
   }
 }
