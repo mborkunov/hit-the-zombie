@@ -2,7 +2,7 @@
   "use strict";
 
   function Game() {
-    this.container = document.getElementsByClassName('game-container')[0];
+    this.container = document.getElementById('container');
 
     this.targets = [];
     this.roundTime = 60;
@@ -29,7 +29,7 @@
     this.soundButton.addEventListener('click', this.soundListener.bind(this), false);
     this.soundButton.className = 'sound ' + (Sound.enabled ? 'on' : 'off');
 
-    this.startButton = document.getElementsByClassName('start')[0];
+    this.startButton = this.addElement('start');
     this.startButton.innerHTML = 'Start';
     this.startButton.addEventListener('click', this.startListener.bind(this), false);
 
@@ -86,7 +86,7 @@
       target.listen();
     });
 
-    this.updateInterval = setInterval(this.update.bind(this), 10);
+    this.updateInterval = setInterval(this.update.bind(this), 15);
     setTimeout(this.stop.bind(this), (this.roundTime - 1) * 1000);
   };
 
@@ -123,8 +123,8 @@
   Game.prototype.update = function() {
     var self = this;
     if (this.startTime !== 0) {
+      var extra = 0.02 * self.getProgress() / 100;
       this.getSleepTargets().forEach(function(target) {
-        var extra = 0.02 * self.getProgress() / 100;
         var probability = (target.front ? 0.005 : 0.0007) + extra;
         if (target.front && Math.random() < probability) {
           target.flipRandomly(true);
@@ -145,8 +145,8 @@
         active.filter(function(target) {
           return !target.rotating;
         }).forEach(function(target) {
-          target.rotate(1);
-        });
+            target.rotate(1);
+          });
       }
     }
     this.targets.forEach(function(target) {
@@ -236,7 +236,7 @@
   }
 
   Target.targetDelay = 2000;
-  Target.angleIncrease = 5;
+  Target.angleIncrease = 15;
 
   Target.prototype.update = function () {
     if (this.rotating) {
@@ -303,10 +303,10 @@
         this.targetElement.style.setProperty('-webkit-transform', 'rotateY(' + this.angle + 'deg)', null);
       } else if ('MozTransform' in document.documentElement.style) { // || goog.userAgent.GECKO
         this.targetElement.style.setProperty('-moz-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180).toFixed(2) + ', 1)', null);
-      /*
-        goog.style.setStyle(this.targetElement, 'msTransform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
-      } else {
-        goog.style.setStyle(this.targetElement, '-o-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');*/
+        /*
+         goog.style.setStyle(this.targetElement, 'msTransform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');
+         } else {
+         goog.style.setStyle(this.targetElement, '-o-transform', 'scale(' + Math.cos(this.angle * Math.PI / 180) + ', 1)');*/
       }
 
       this.angle += Target.angleIncrease;
@@ -400,6 +400,7 @@
     } else {
       this.progress = Math.min(this.progress + 10, 100);
     }
+
     this.setProgress(this.progress);
     this.updateText();
   };

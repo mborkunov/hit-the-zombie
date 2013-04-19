@@ -7,10 +7,13 @@ body.cat {
   background: url('../images/bg.png'), -o-linear-gradient(#4f1a1c, #000600);
   background: url('../images/bg.png'), linear-gradient(#4f1a1c, #000600);
 
-  .game-container {
+  #container {
     border: 1px solid #401f1f;
     background: #2f1211 url('../images/cat/bg.png');
     .target {
+      &:hover {
+        background-color: lightpink !important;
+      }
       &.front {
         background: url('../images/cat/plate.png') 0 0 no-repeat;
       }

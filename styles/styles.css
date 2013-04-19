@@ -4,26 +4,28 @@ body.cat {
   background: url("../images/bg.png"), -moz-linear-gradient(#4f1a1c, #000600);
   background: url("../images/bg.png"), -o-linear-gradient(#4f1a1c, #000600);
   background: url("../images/bg.png"), linear-gradient(#4f1a1c, #000600); }
-  body.cat .game-container {
+  body.cat #container {
     border: 1px solid #401f1f;
     background: #2f1211 url("../images/cat/bg.png"); }
-    body.cat .game-container .target.front {
+    body.cat #container .target:hover {
+      background-color: lightpink !important; }
+    body.cat #container .target.front {
       background: url("../images/cat/plate.png") 0 0 no-repeat; }
-    body.cat .game-container .target .remaining {
+    body.cat #container .target .remaining {
       background: #b03500; }
-    body.cat .game-container .target.target-1 {
+    body.cat #container .target.target-1 {
       background: white url("../images/cat/cat-1.png") 10px 10px no-repeat; }
-      body.cat .game-container .target.target-1.target-hit {
+      body.cat #container .target.target-1.target-hit {
         background: url("../images/cat/cross.png") 10px 10px no-repeat, white url("../images/cat/cat-1.png") 10px 10px no-repeat; }
-    body.cat .game-container .target.target-2 {
+    body.cat #container .target.target-2 {
       background: white url("../images/cat/cat-2.png") 10px 10px no-repeat; }
-      body.cat .game-container .target.target-2.target-hit {
+      body.cat #container .target.target-2.target-hit {
         background: url("../images/cat/cross.png") 10px 10px no-repeat, white url("../images/cat/cat-2.png") 10px 10px no-repeat; }
-    body.cat .game-container .target.target-3 {
+    body.cat #container .target.target-3 {
       background: white url("../images/cat/cat-3.png") 10px 10px no-repeat; }
-      body.cat .game-container .target.target-3.target-hit {
+      body.cat #container .target.target-3.target-hit {
         background: url("../images/cat/cross.png") 10px 10px no-repeat, white url("../images/cat/cat-3.png") 10px 10px no-repeat; }
-    body.cat .game-container .start {
+    body.cat #container .start {
       background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3a1d1c), color-stop(100%, #2f1211));
       background: -webkit-linear-gradient(#3a1d1c, #2f1211);
       background: -moz-linear-gradient(#3a1d1c, #2f1211);
@@ -35,7 +37,7 @@ body.cat {
       -webkit-box-shadow: inset 0 1px 0 0 #3a1d1c;
       -moz-box-shadow: inset 0 1px 0 0 #3a1d1c;
       box-shadow: inset 0 1px 0 0 #3a1d1c; }
-      body.cat .game-container .start:hover {
+      body.cat #container .start:hover {
         background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2f1211), color-stop(100%, #3a1d1c));
         background: -webkit-linear-gradient(#2f1211, #3a1d1c);
         background: -moz-linear-gradient(#2f1211, #3a1d1c);
@@ -44,27 +46,27 @@ body.cat {
         -webkit-box-shadow: inset 0 1px 0 0 #3a1d1c;
         -moz-box-shadow: inset 0 1px 0 0 #3a1d1c;
         box-shadow: inset 0 1px 0 0 #3a1d1c; }
-      body.cat .game-container .start:active {
+      body.cat #container .start:active {
         border: 1px solid #231211;
         border-bottom: 1px solid #231211;
         -webkit-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
         -moz-box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212;
         box-shadow: inset 0 0 8px 4px #231211, 0 1px 0 0 #131212; }
-    body.cat .game-container .score {
+    body.cat #container .score {
       text-shadow: white 0px 0px 10px; }
-      body.cat .game-container .score.shrink {
+      body.cat #container .score.shrink {
         color: #1f1f1f; }
-      body.cat .game-container .score.grow {
+      body.cat #container .score.grow {
         color: #812d2e; }
-    body.cat .game-container .timer {
+    body.cat #container .timer {
       color: white; }
-    body.cat .game-container .highscore {
+    body.cat #container .highscore {
       color: white; }
-    body.cat .game-container .multiplier .text {
+    body.cat #container .multiplier .text {
       color: white; }
-    body.cat .game-container .multiplier .bar {
+    body.cat #container .multiplier .bar {
       border: 2px solid white; }
-      body.cat .game-container .multiplier .bar .progress {
+      body.cat #container .multiplier .bar .progress {
         background: #d49299; }
   body.cat .theme {
     border: 3px solid #d49299;
@@ -76,25 +78,27 @@ body.zombie {
   background: url("../images/bg.png"), -moz-linear-gradient(#012212, #000600);
   background: url("../images/bg.png"), -o-linear-gradient(#012212, #000600);
   background: url("../images/bg.png"), linear-gradient(#012212, #000600); }
-  body.zombie .game-container {
+  body.zombie #container {
     background: #012212 url("../images/zombie/cemetery-2.jpg") no-repeat; }
-    body.zombie .game-container .target.front {
+    body.zombie #container .target:hover {
+      background-color: #cdd4d2 !important; }
+    body.zombie #container .target.front {
       background: white url("../images/zombie/target.png") 0 0 no-repeat; }
-    body.zombie .game-container .target .remaining {
+    body.zombie #container .target .remaining {
       background: #f00; }
-    body.zombie .game-container .target.target-1 {
+    body.zombie #container .target.target-1 {
       background: white url("../images/zombie/zombie-1.png") 15px 10px no-repeat; }
-      body.zombie .game-container .target.target-1.target-hit {
+      body.zombie #container .target.target-1.target-hit {
         background: url("../images/zombie/cross.png") 10px 10px no-repeat, white url("../images/zombie/zombie-1.png") 15px 10px no-repeat; }
-    body.zombie .game-container .target.target-2 {
+    body.zombie #container .target.target-2 {
       background: white url("../images/zombie/zombie-2.png") 15px 10px no-repeat; }
-      body.zombie .game-container .target.target-2.target-hit {
+      body.zombie #container .target.target-2.target-hit {
         background: url("../images/zombie/cross.png") 10px 10px no-repeat, white url("../images/zombie/zombie-2.png") 15px 10px no-repeat; }
-    body.zombie .game-container .target.target-3 {
+    body.zombie #container .target.target-3 {
       background: white url("../images/zombie/zombie-3.png") 15px 10px no-repeat; }
-      body.zombie .game-container .target.target-3.target-hit {
+      body.zombie #container .target.target-3.target-hit {
         background: url("../images/zombie/cross.png") 10px 10px no-repeat, white url("../images/zombie/zombie-3.png") 15px 10px no-repeat; }
-    body.zombie .game-container .start {
+    body.zombie #container .start {
       background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d4319), color-stop(100%, #07150e));
       background: -webkit-linear-gradient(#0d4319, #07150e);
       background: -moz-linear-gradient(#0d4319, #07150e);
@@ -106,7 +110,7 @@ body.zombie {
       border: 1px solid #0b2217;
       border-bottom: 1px solid #0b2217;
       text-shadow: 0 -1px 0 #4c9021; }
-      body.zombie .game-container .start:hover {
+      body.zombie #container .start:hover {
         background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #07150e), color-stop(100%, #0d4319));
         background: -webkit-linear-gradient(#07150e, #0d4319);
         background: -moz-linear-gradient(#07150e, #0d4319);
@@ -115,24 +119,24 @@ body.zombie {
         -webkit-box-shadow: #0d4319 0 0 0 1px;
         -moz-box-shadow: #0d4319 0 0 0 1px;
         box-shadow: #0d4319 0 0 0 1px; }
-      body.zombie .game-container .start:active {
+      body.zombie #container .start:active {
         border: 1px solid #07230e;
         -webkit-box-shadow: #07230e 0 0 0 2px;
         -moz-box-shadow: #07230e 0 0 0 2px;
         box-shadow: #07230e 0 0 0 2px; }
-    body.zombie .game-container .score.shrink {
+    body.zombie #container .score.shrink {
       color: red; }
-    body.zombie .game-container .score.grow {
+    body.zombie #container .score.grow {
       color: green; }
-    body.zombie .game-container .timer {
+    body.zombie #container .timer {
       color: yellow; }
-    body.zombie .game-container .highscore {
+    body.zombie #container .highscore {
       color: yellow; }
-    body.zombie .game-container .multiplier .text {
+    body.zombie #container .multiplier .text {
       color: yellow; }
-    body.zombie .game-container .multiplier .bar {
+    body.zombie #container .multiplier .bar {
       border: 2px solid yellow; }
-      body.zombie .game-container .multiplier .bar .progress {
+      body.zombie #container .multiplier .bar .progress {
         background: #64c15c; }
   body.zombie .theme {
     border: 3px solid #0c3f18;
@@ -227,7 +231,7 @@ body {
       background: #5c92ff, -moz-linear-gradient(#669eff, #5286ff);
       background: #5c92ff, -o-linear-gradient(#669eff, #5286ff);
       background: #5c92ff, linear-gradient(#669eff, #5286ff); }
-  body .game-container {
+  body #container {
     border: 1px solid #222;
     position: absolute;
     z-index: 2;
@@ -241,7 +245,7 @@ body {
     top: 50%;
     left: 50%;
     margin: -300px 0 0 -400px; }
-    body .game-container .overlay {
+    body #container .overlay {
       position: absolute;
       z-index: 10;
       width: 100%;
@@ -249,7 +253,7 @@ body {
       top: 0;
       left: 0;
       background: rgba(0, 0, 0, 0.4); }
-    body .game-container .score {
+    body #container .score {
       font-size: 75px;
       margin-top: 35px;
       font-weight: normal;
@@ -261,9 +265,9 @@ body {
       -o-transition: color 0.3s ease;
       transition: color 0.3s ease;
       z-index: 9; }
-    body .game-container.sound-enabled .sound {
+    body #container.sound-enabled .sound {
       display: block; }
-    body .game-container .sound {
+    body #container .sound {
       display: none;
       position: absolute;
       bottom: 0px;
@@ -277,11 +281,11 @@ body {
       -ms-transform: scale(0.5);
       -o-transform: scale(0.5);
       transform: scale(0.5); }
-      body .game-container .sound.on {
+      body #container .sound.on {
         background: transparent url("../images/sound-on.png") 0 0 no-repeat; }
-      body .game-container .sound.off {
+      body #container .sound.off {
         background: transparent url("../images/sound-off.png") 0 0 no-repeat; }
-    body .game-container .theme {
+    body #container .theme {
       position: absolute;
       bottom: 10px;
       right: 10px;
@@ -290,7 +294,7 @@ body {
       background-color: silver;
       border-radius: 25px;
       z-index: 11; }
-    body .game-container .highscore {
+    body #container .highscore {
       font-size: 25px;
       text-align: left;
       text-shadow: black 0px 0px 10px;
@@ -298,7 +302,7 @@ body {
       position: absolute;
       top: 5px;
       left: 15px; }
-    body .game-container .timer {
+    body #container .timer {
       position: absolute;
       top: 50px;
       right: 20px;
@@ -306,7 +310,7 @@ body {
       text-align: center;
       text-shadow: black 0px 0px 10px;
       z-index: 9; }
-    body .game-container .start {
+    body #container .start {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -321,30 +325,28 @@ body {
       -o-border-radius: 10px;
       border-radius: 10px;
       color: #fff;
-      font-size: 20px;
-      font-weight: bold;
-      line-height: 1;
+      font: bold 30px/50px sans-serif;
       padding: 7px 0 8px 0;
       text-align: center; }
-      body .game-container .start:hover {
+      body #container .start:hover {
         cursor: pointer; }
-    body .game-container .target {
+    body #container .target {
       padding: 0;
       position: absolute;
       z-index: 1;
       width: 100px;
       height: 100px;
-      -webkit-border-radius: 50px;
-      -khtml-border-radius: 50px;
-      -moz-border-radius: 50px;
-      -ms-border-radius: 50px;
-      -o-border-radius: 50px;
-      border-radius: 50px;
+      -webkit-border-radius: 50%;
+      -khtml-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%;
       background-color: #fff;
       cursor: pointer; }
-      body .game-container .target.front .remaining {
+      body #container .target.front .remaining {
         display: none !important; }
-      body .game-container .target .remaining {
+      body #container .target .remaining {
         width: 40px;
         height: 3px;
         position: absolute;
@@ -357,20 +359,20 @@ body {
         -ms-border-radius: 2px;
         -o-border-radius: 2px;
         border-radius: 2px; }
-    body .game-container .multiplier {
+    body #container .multiplier {
       position: absolute;
       top: 10px;
       right: 20px; }
-      body .game-container .multiplier .text {
+      body #container .multiplier .text {
         font-size: 35px;
         font-weight: bold;
         float: left; }
-      body .game-container .multiplier .bar {
+      body #container .multiplier .bar {
         width: 200px;
         height: 25px;
         margin: 5px 0 0 10px;
         float: left; }
-        body .game-container .multiplier .bar .progress {
+        body #container .multiplier .bar .progress {
           -webkit-transition: width 0.1s linear;
           -moz-transition: width 0.1s linear;
           -o-transition: width 0.1s linear;

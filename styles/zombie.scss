@@ -1,4 +1,5 @@
 $color: yellow;
+$hover-color: green;
 
 body.zombie {
   background: url('../images/bg.png'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #012212), color-stop(100%, #000600));
@@ -9,9 +10,12 @@ body.zombie {
 
   //@include background(linear-gradient(#012212, #000600));
 
-  .game-container {
+  #container {
     background: #012212 url('../images/zombie/cemetery-2.jpg') no-repeat;
     .target {
+      &:hover {
+        background-color: lighten(#576460, 45%) !important;
+      }
       &.front {
         background: #fff url('../images/zombie/target.png') 0 0 no-repeat;
       }
