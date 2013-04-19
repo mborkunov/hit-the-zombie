@@ -343,6 +343,7 @@ class Sound
           xhr.send()
         catch ignored
   @setEnabled: (enabled)->
+    @enabled = enabled
     localStorage?.setItem 'sound', enabled
 
 

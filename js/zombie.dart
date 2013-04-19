@@ -32,6 +32,7 @@ class Game {
   set highscore(int highscore) {
     _highscore = highscore;
     highScoreElement.text = 'Highscore: ${_highscore}';
+    window.localStorage['highscore'] = _highscore;
   }
 
   final Stopwatch stopWatch = new Stopwatch();
@@ -415,19 +416,23 @@ class Sound {
 
   static Map<String,AudioBuffer> _buffers = new Map();
 
-  static set enabled(bool enabled) => _enabled = enabled;
+  static set enabled(bool enabled) {
+    _enabled = enabled;
+    window.localStorage['sound'] = enabled;
+  }
 
   static init() {
     if (!_initialized) {
       _initialized = true;
       try {
         _ctx = new AudioContext();
-        _enabled = !window.localStorage.containsValue('sound') || window.localStorage['sound'] == 'false';
+        _enabled = window.localStorage.containsKey('sound') && window.localStorage['sound'] == 'true';
       } catch (e) {
         print(e);
+        return false;
       }
     }
-    return _enabled;
+    return true;
   }
 
   static _playBuffer(AudioBuffer buffer) {
