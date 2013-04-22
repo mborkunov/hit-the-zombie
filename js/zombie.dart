@@ -75,7 +75,7 @@ class Game {
     scoreElement = addElement('score');
     overlay = addElement('overlay');
 
-    multiplier = new Multiplier();
+    multiplier = new Multiplier(container);
 
     if (window.localStorage.containsKey('highscore')) {
       highscore = int.parse(window.localStorage['highscore']);
@@ -188,6 +188,7 @@ class Target {
   DivElement element;
   DivElement remainingElement;
   StreamSubscription listener;
+  StreamSubscription touchListener;
 
   bool rotating = false;
   bool front = true;
@@ -243,7 +244,7 @@ class Target {
   }
 
   void listen() {
-    listener = element.onMouseDown.listen((e) {
+    var handler = (e) {
       int score = game.score;
       String className = null;
       if (front) {
@@ -267,10 +268,17 @@ class Target {
       }
       e.preventDefault();
       return false;
-    });
+    };
+
+    touchListener = element.onTouchStart.listen(handler);
+    listener = element.onMouseDown.listen(handler);
   }
 
-  void stopListening() => listener.cancel();
+
+  void stopListening() {
+    touchListener.cancel();
+    listener.cancel();
+  }
 
   void rotate(int _turns) {
     rotating = true;
@@ -320,6 +328,7 @@ class Multiplier {
   static final int MAX_FACTOR = 5;
 
   DivElement barElement;
+  DivElement progressElement;
   DivElement textElement;
 
   int _factor = 1;
@@ -334,14 +343,29 @@ class Multiplier {
 
   set progress(int progress) {
     _progress = progress;
-    barElement.style.width = '${_progress}%';
+    progressElement.style.width = '${_progress}%';
   }
   int get progress => _progress;
 
-  Multiplier() {
-    DivElement parent = query('.multiplier');
-    textElement = parent.query('.text');
-    barElement = parent.query('.bar .progress');
+  Multiplier(DivElement container) {
+    DivElement parent = new DivElement();
+    parent.classes.add("multiplier");
+
+
+    textElement = new DivElement();
+    textElement.classes.add("text");
+
+    barElement = new DivElement();
+    barElement.classes.add("bar");
+
+    progressElement = new DivElement();
+    progressElement.classes.add("progress");
+
+    barElement.children.add(progressElement);
+    parent.children.add(textElement);
+    parent.children.add(barElement);
+
+    container.children.add(parent);
   }
 
   void miss() {
