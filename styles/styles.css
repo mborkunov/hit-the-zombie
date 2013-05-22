@@ -69,8 +69,8 @@ body.cat {
       body.cat #container .multiplier .bar .progress {
         background: #d49299; }
   body.cat .theme {
-    border: 3px solid #d49299;
-    background: black url("../images/cat/icon.png") 5px 5px no-repeat; }
+    border: 3px solid #0c3f18;
+    background: url("../images/zombie/icon.png") 2px 3px no-repeat; }
 
 body.zombie {
   background: url("../images/bg.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #012212), color-stop(100%, #000600));
@@ -139,8 +139,8 @@ body.zombie {
       body.zombie #container .multiplier .bar .progress {
         background: #64c15c; }
   body.zombie .theme {
-    border: 3px solid #0c3f18;
-    background: url("../images/zombie/icon.png") 2px 3px no-repeat; }
+    border: 3px solid #d49299;
+    background: black url("../images/cat/icon.png") 5px 5px no-repeat; }
 
 * {
   padding: 0;
@@ -171,27 +171,6 @@ body {
   -moz-transition: all 1s linear;
   -o-transition: all 1s linear;
   transition: all 1s linear; }
-  body.ipad div, body.ipad button {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none; }
-  body.ipad #container {
-    width: 1024px !important;
-    height: 768px !important;
-    top: 0;
-    left: 0;
-    margin: 0; }
-  body.android div, body.android button {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none; }
-  body.android #container {
-    width: 100% !important;
-    height: 100% !important;
-    position: relative;
-    top: 0;
-    left: 0;
-    margin: 0; }
   body .market-link {
     display: none; }
   body .install-button {
@@ -201,7 +180,7 @@ body {
     right: 20px;
     line-height: 16px;
     padding: 5px 20px;
-    border: 1px solid #2D53AF;
+    border: 1px solid #2d53af;
     cursor: pointer;
     color: white;
     font-size: 13px;
@@ -232,7 +211,7 @@ body {
       background: #5c92ff, -o-linear-gradient(#669eff, #5286ff);
       background: #5c92ff, linear-gradient(#669eff, #5286ff); }
   body #container {
-    border: 1px solid #222;
+    border: 1px solid #222222;
     position: absolute;
     z-index: 2;
     -webkit-box-shadow: 0 0 10px black;
@@ -244,7 +223,11 @@ body {
     height: 600px;
     top: 50%;
     left: 50%;
-    margin: -300px 0 0 -400px; }
+    margin: -300px 0 0 -400px;
+    -webkit-perspective: 700px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none; }
     body #container .overlay {
       position: absolute;
       z-index: 10;
@@ -314,9 +297,9 @@ body {
       position: absolute;
       top: 50%;
       left: 50%;
+      margin: -25px 0 0 -100px;
       width: 200px;
       height: 50px;
-      margin: -25px 0 0 -100px;
       z-index: 11;
       -webkit-border-radius: 10px;
       -khtml-border-radius: 10px;

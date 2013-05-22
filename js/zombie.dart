@@ -49,6 +49,7 @@ class Game {
   DivElement soundButton;
   DivElement scoreElement;
   DivElement highScoreElement;
+  int zoom = 1;
 
   Game() {
     container = query('#container');
@@ -70,6 +71,13 @@ class Game {
     startButton.onClick.listen((event) => start());
     timerElement = addElement('timer');
     themeElement = addElement('theme');
+
+    document.body.onMouseWheel.listen((WheelEvent e) {
+      this.zoom += (e.deltaY > 0 ?  -.05 : .05);
+      this.zoom = math.max(0.2, math.min(5, this.zoom.abs()));
+      container.style.transform = "scale(${this.zoom})";
+    });
+
     themeElement.onClick.listen((event) => Theme.next());
     highScoreElement = addElement('highscore');
     scoreElement = addElement('score');
@@ -89,6 +97,7 @@ class Game {
 
   void start() {
     Sound.play('start');
+    Stats.reset();
     startButton.style.display = 'none';
     overlay.style.display = 'none';
 
@@ -114,13 +123,17 @@ class Game {
     if (score > highscore) {
       highscore = score;
     }
+    Stats.show();
     multiplier.progress = 0;
     multiplier.factor = 1;
   }
 
   int get progress => (timeLeft * 100 / ROUND_TIME).round();
 
-  int get timeLeft => stopWatch.isRunning ? (ROUND_TIME * 1000 - stopWatch.elapsedMilliseconds) : -1;
+  int get timeLeft {
+    var timeLeft = (ROUND_TIME * 1000 - stopWatch.elapsedMilliseconds);
+    return stopWatch.isRunning ? timeLeft : -1;
+  }
 
   void update(Timer timer) {
     if (stopWatch.isRunning) {
@@ -251,12 +264,14 @@ class Target {
         className = 'shrink';
         score = math.max(0, game.score - 5);
         Sound.play('fail');
+        Stats.miss++;
         game.multiplier.miss();
       } else {
         className = 'grow';
         rotate(1);
         score = game.score + 10 * game.multiplier.factor;
         element.classes.add('target-hit');
+        Stats.hit++;
         game.multiplier.hit();
         Sound.play('hit');
         hideRemaining();
@@ -291,7 +306,7 @@ class Target {
       angle %= 360;
     }
 
-    if (angle % 180 === 0) {
+    if (angle % 180 == 0) {
       currentTurn++;
       if (currentTurn > turns) {
         rotating = false;
@@ -313,13 +328,13 @@ class Target {
         this.front = true;
       }
       angle += ANGLE_DELTA;
-      element.style.transform = 'scale(${math.cos(angle * math.PI / 180)}, 1)';
+      element.style.transform = 'rotateY(${angle}deg)';
     }
   }
 
   void flipRandomly(bool even) {
     int flips = (new math.Random().nextDouble() * 3).round();
-    this.rotate(flips % 2 === (even ? 1 : 0) ? flips : flips + 1);
+    this.rotate(flips % 2 == (even ? 1 : 0) ? flips : flips + 1);
   }
 }
 
@@ -403,6 +418,39 @@ class Multiplier {
     } else if (progress > 0) {
       progress -= 0.1;
     }
+  }
+}
+
+class Stats {
+
+  static int _hit = 0;
+  static int _miss = 0;
+  static int click = 0;
+
+  static int get hit => _hit;
+  static int get miss => _miss;
+
+  static set hit(int i) {
+    click++;
+    _hit = i;
+  }
+
+  static set miss(int i) {
+    click++;
+    _miss = i;
+  }
+
+  static reset() {
+    _hit = _miss = click = 0;
+  }
+
+  static show() {
+    /*print("Apm: ${Stats.hit + Stats.miss}");
+    print("Hits: ${Stats.hit}");
+    print("Misses: ${Stats.miss}");
+    var accuracy = Stats.hit / Stats.click * 100;
+    print("Accuracy: ${accuracy.round()}");
+    print("Clicks: ${Stats.click}");*/
   }
 }
 

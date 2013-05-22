@@ -37,31 +37,6 @@ html, body {
 body {
   overflow: hidden;
   @include transition(all 1s linear);
-  &.ipad {
-    div, button {
-      @include box-shadow(none);
-    }
-    #container {
-      width: 1024px !important;
-      height: 768px !important;
-      top: 0;
-      left: 0;
-      margin: 0;
-    }
-  }
-  &.android {
-    div, button {
-      @include box-shadow(none);
-    }
-    #container {
-      width: 100% !important;
-      height: 100% !important;
-      position: relative;
-      top: 0;
-      left: 0;
-      margin: 0;
-    }
-  }
 
   .market-link {
     display: none;
@@ -105,6 +80,9 @@ body {
     top: 50%;
     left: 50%;
     margin: -300px 0 0 -400px;
+
+    -webkit-perspective: 700px;
+    @include box-shadow(none);
 
     .overlay {
       position: absolute;
@@ -185,9 +163,9 @@ body {
       position: absolute;
       top: 50%;
       left: 50%;
+      margin: -25px 0 0 -100px;
       width: 200px;
       height: 50px;
-      margin: -25px 0 0 -100px;
       z-index: 11;
       @include border-radius(10px);
       color: #fff;
