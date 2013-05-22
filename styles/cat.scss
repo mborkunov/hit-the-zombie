@@ -49,6 +49,11 @@ body.cat {
       }
     }
 
+    .stats {
+      background: none repeat scroll 0% 0% rgba(87, 37, 39, 0.95);
+      border: 1px solid #ffffff;
+    }
+
     .score {
       text-shadow: $color 0px 0px 10px;
 

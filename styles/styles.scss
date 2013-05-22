@@ -177,6 +177,35 @@ body {
       }
     }
 
+    .stats {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -160px;
+      margin-left: -170px;
+      width: 300px;
+      height: 60px;
+      color: white;
+      font: 22px/28px Tahoma;
+      z-index: 12;
+      padding: 15px 20px;
+      @include border-radius(25px);
+      @include column-count(2);
+
+      .label, .value {
+        display: inline-block;
+      }
+      .label {
+        width: 80%;
+        &.short {
+          width: 45%;
+        }
+      }
+      .value {
+        width: 12%;
+      }
+    }
+
     .target {
       padding: 0;
       position: absolute;

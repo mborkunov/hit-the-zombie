@@ -123,7 +123,7 @@ class Game {
     if (score > highscore) {
       highscore = score;
     }
-    Stats.show();
+    Stats.show(startButton);
     multiplier.progress = 0;
     multiplier.factor = 1;
   }
@@ -442,15 +442,32 @@ class Stats {
 
   static reset() {
     _hit = _miss = click = 0;
+    DivElement stats = query(".stats");
+    if (stats != null) {
+      stats.style.display = "none";
+    }
   }
 
-  static show() {
-    /*print("Apm: ${Stats.hit + Stats.miss}");
-    print("Hits: ${Stats.hit}");
-    print("Misses: ${Stats.miss}");
+  static show(DivElement startButton) {
+    DivElement stats = query(".stats");
+
+    if (stats == null) {
+      stats = new DivElement();
+      stats.classes.add("stats");
+      startButton.parentNode.insertBefore(stats, startButton);
+    }
+    stats.style.display = "block";
+
     var accuracy = Stats.hit / Stats.click * 100;
-    print("Accuracy: ${accuracy.round()}");
-    print("Clicks: ${Stats.click}");*/
+    accuracy = accuracy.round();
+
+    int apm = (60 * (Stats.hit + Stats.miss) / Game.ROUND_TIME).round();
+    stats.innerHtml = """
+      <span class="label short">APM:</span> <span class="value">${apm}</span>
+      <span class="label short">Hits:</span> <span class="value">${Stats.hit}</span><br/>
+      <span class="label">Misses:</span> <span class="value">${Stats.miss}</span><br/>
+      <span class="label">Accuracy:</span> <span class="value">${accuracy}</span>
+     """;
   }
 }
 
