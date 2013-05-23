@@ -458,8 +458,12 @@ class Stats {
     }
     stats.style.display = "block";
 
-    var accuracy = Stats.hit / Stats.click * 100;
-    accuracy = accuracy.round();
+
+    var accuracy = "-";
+    if (Stats.click > 0) {
+      accuracy = Stats.hit / Stats.click * 100;
+      accuracy = accuracy.round();
+    }
 
     int apm = (60 * (Stats.hit + Stats.miss) / Game.ROUND_TIME).round();
     stats.innerHtml = """
