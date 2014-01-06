@@ -1,2 +1,2 @@
 #!/bin/sh
-zip -r zombie.war WEB-INF images sounds index.html favicon.ico js/zombie.js styles/styles.css
+zip -r zombie.war WEB-INF images sounds index.html favicon.ico scripts/zombie.js styles/styles.css

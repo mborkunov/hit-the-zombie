@@ -3,6 +3,7 @@ $experimental-support-for-ms : true !default;
 
 @import "compass/support";
 @import "compass/css3";
+@import "compass/css3/user-interface";
 @import "cat";
 @import "zombie";
 
@@ -10,6 +11,8 @@ $experimental-support-for-ms : true !default;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
+  @include user-select(none);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 html, body {
@@ -35,6 +38,17 @@ html, body {
 }
 
 body {
+/*  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  */
+
+
+
+
   overflow: hidden;
   @include transition(all 1s linear);
 

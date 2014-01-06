@@ -32,7 +32,7 @@ class Game {
   set highscore(int highscore) {
     _highscore = highscore;
     highScoreElement.text = 'Highscore: ${_highscore}';
-    window.localStorage['highscore'] = _highscore;
+    window.localStorage['highscore'] = _highscore.toString();
   }
 
   final Stopwatch stopWatch = new Stopwatch();
@@ -60,15 +60,22 @@ class Game {
 
     soundButton = addElement('sound');
     soundButton.classes.add(Sound.enabled ? 'on' : 'off');
-    soundButton.onClick.listen((event) {
+    var soundListener = (event) {
       Sound.enabled = !Sound.enabled;
       soundButton.classes.remove(Sound.enabled ? 'off' : 'on');
       soundButton.classes.add(Sound.enabled ? 'on' : 'off');
-    });
+    };
+    soundButton.onMouseDown.listen(soundListener);
+    soundButton.onTouchStart.listen(soundListener);
 
     startButton = addElement('start');
     startButton.text = 'Start';
-    startButton.onClick.listen((event) => start());
+    var startListener = (event) {
+      start();
+      event.preventDefault();
+    };
+    startButton.onMouseDown.listen(startListener);
+    startButton.onTouchStart.listen(startListener);
     timerElement = addElement('timer');
     themeElement = addElement('theme');
 
@@ -78,7 +85,8 @@ class Game {
       container.style.transform = "scale(${this.zoom})";
     });
 
-    themeElement.onClick.listen((event) => Theme.next());
+    themeElement.onMouseDown.listen((event) => Theme.next());
+    themeElement.onTouchStart.listen((event) => Theme.next());
     highScoreElement = addElement('highscore');
     scoreElement = addElement('score');
     overlay = addElement('overlay');
@@ -145,7 +153,7 @@ class Game {
           target.flipRandomly(true);
         }
       });
-      timerElement.text = (timeLeft / 1000).round();
+      timerElement.text = (timeLeft / 1000).round().toString();
     } else {
       List<Target> active = getActiveTargets();
       if (active.isEmpty) {
@@ -205,7 +213,6 @@ class Target {
 
   bool rotating = false;
   bool front = true;
-
   int angle = 0;
   int turns = 0;
   int currentTurn = 0;
@@ -512,7 +519,7 @@ class Sound {
 
   static set enabled(bool enabled) {
     _enabled = enabled;
-    window.localStorage['sound'] = enabled;
+    window.localStorage['sound'] = enabled.toString();
   }
 
   static init() {
@@ -534,8 +541,8 @@ class Sound {
   static _playBuffer(AudioBuffer buffer) {
     if (buffer == null) return;
     AudioBufferSourceNode sourceNode = _ctx.createBufferSource();
-    sourceNode.connect(_ctx.destination, 0, 0);
     sourceNode.buffer = buffer;
+    sourceNode.connectNode(_ctx.destination);
     sourceNode.start(0);
   }
 
@@ -552,18 +559,18 @@ class Sound {
       request.responseType = "arraybuffer";
       request.onLoadEnd.listen((e) {
         try {
-          _ctx.decodeAudioData(request.response, (buffer) {
-            _playBuffer(buffer);
-            _buffers[key] = buffer;
-          }, (error) {
-            _buffers[key] = null;
-            print('Error decoding ogg file');
-          });
+          _ctx.decodeAudioData(request.response)
+            .then((buffer) {
+              _playBuffer(buffer);
+              _buffers[key] = buffer;
+            }, onError: (error) {
+              _buffers[key] = null;
+              print(error);
+            });
         } catch (e) {
           _buffers[key] = null;
           print(e);
         }
-
       });
       request.send();
     }
