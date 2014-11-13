@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:html';
 import 'dart:web_audio';
+import 'dart:convert';
+import 'dart:js';
 import 'dart:math' as math;
 
 main() {
@@ -15,6 +17,7 @@ main() {
 }
 
 class Game {
+
   static const int ROUND_TIME = 60;
 
   int _score = 0;
@@ -52,7 +55,7 @@ class Game {
   int zoom = 1;
 
   Game() {
-    container = query('#container');
+    container = querySelector('#container');
     Theme.init();
     if (Sound.init()) {
       container.classes.add('sound-enabled');
@@ -131,7 +134,7 @@ class Game {
     if (score > highscore) {
       highscore = score;
     }
-    Stats.show(startButton);
+    Stats.show(startButton, score);
     multiplier.progress = 0;
     multiplier.factor = 1;
   }
@@ -449,14 +452,18 @@ class Stats {
 
   static reset() {
     _hit = _miss = click = 0;
-    DivElement stats = query(".stats");
+    DivElement stats = querySelector(".stats");
     if (stats != null) {
       stats.style.display = "none";
     }
+    Element board = querySelector(".board");
+    if (board != null) {
+      board.style.display = "none";
+    }
   }
 
-  static show(DivElement startButton) {
-    DivElement stats = query(".stats");
+  static show(DivElement startButton, int score) {
+    DivElement stats = querySelector(".stats");
 
     if (stats == null) {
       stats = new DivElement();
@@ -479,11 +486,51 @@ class Stats {
       <span class="label">Misses:</span> <span class="value">${Stats.miss}</span><br/>
       <span class="label">Accuracy:</span> <span class="value">${accuracy}</span>
      """;
+
+    if (score > 0) {
+      var name = '';
+      if (!window.localStorage.containsKey('name')) {
+        name = context.callMethod('prompt', ['Enter your name!']);
+        if (name.isEmpty) {
+          name = 'nobody';
+        }
+        window.localStorage['name'] = name;
+      }
+
+      var data = {'name': window.localStorage['name'], 'score': score.toString(), 'accuracy': accuracy.toString()};
+      HttpRequest.postFormData('./score', data).then((HttpRequest resp) {
+        showHighScore(startButton, JSON.decode(resp.response));
+      });
+    }
+  }
+
+  static showHighScore(DivElement startButton, List data) {
+    OListElement board = querySelector(".board");
+
+    if (board == null) {
+      board = new OListElement();
+      board.classes.add('board');
+      startButton.parentNode.append(board);
+    }
+
+    board.innerHtml = '';
+    data.forEach((item) {
+      board.appendHtml("<li>${item['value']} (${item['accuracy']}%) - ${item['name']}</li>");
+    });
+    board.style.display = 'block';/*
+    board.style.visibility = 'hidden';
+
+    var width = board.getComputedStyle().width.replaceAll('px','');
+    print(double.parse(width));
+    print(double.parse(width).toInt()/2);
+    board.style.marginLeft = "-${double.parse(width).toInt()/2}px";
+    board.style.visibility = 'visible';*/
+
   }
 }
 
 class Theme {
-  static final BodyElement body = query('body');
+  static final BodyElement body = querySelector('body');
   static final List<String> LIST = ['zombie', 'cat'];
   static final String KEY = 'theme';
   static String current = LIST[0];
