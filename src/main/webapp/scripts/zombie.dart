@@ -368,7 +368,7 @@ class Multiplier {
 
   set progress(int progress) {
     _progress = progress;
-    progressElement.style.width = '${_progress}%';
+    progressElement.style.width = '${_progress.toInt()}%';
   }
   int get progress => _progress;
 

@@ -43,6 +43,19 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.jelastic</groupId>
+                <artifactId>jelastic-maven-plugin</artifactId>
+                <version>1.7</version>
+                <configuration>
+                    <email>${jelastic.email}</email>
+                    <password>${jelastic.password}</password>
+                    <context>/zombie</context>
+                    <environment>${jelastic.environment}</environment>
+                    <comment>${jelastic.comment}</comment>
+                    <api_hoster>${jelastic.hoster_api}</api_hoster>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
