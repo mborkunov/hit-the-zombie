@@ -268,6 +268,10 @@ class Target {
 
   void listen() {
     var handler = (e) {
+      if (e is MouseEvent && (e as MouseEvent).button != 0) {
+        e.preventDefault();
+        return false;
+      }
       int score = game.score;
       String className = null;
       if (front) {
