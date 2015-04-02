@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:html';
+import 'dart:html_common';
 import 'dart:web_audio';
 import 'dart:convert';
 import 'dart:js';
@@ -10,10 +11,22 @@ main() {
     e.preventDefault();
     return false;
   };
+
   document.onContextMenu.listen(empty);
   document.onMouseDown.listen(empty);
   document.onTouchStart.listen(empty);
-  new Game();
+
+  var game = new Game();
+  if (Device.isWebKit) {
+    var container = querySelector("#container");
+    var x = 0, y = 0;
+    document.onMouseMove.listen((MouseEvent e) {
+      var y = ((e.client.x / document.body.clientWidth) * 30) - 15;
+      var x = ((e.client.y / document.body.clientHeight) * 30) - 15;
+      container.style.transform = "scale(${game.zoom})rotateX(${x}deg) rotateY(${-y}deg)";
+    });
+  }
+
 }
 
 class Game {
@@ -521,15 +534,7 @@ class Stats {
     data.forEach((item) {
       board.appendHtml("<li>${item['value']} (${item['accuracy']}%) - ${item['name']}</li>");
     });
-    board.style.display = 'block';/*
-    board.style.visibility = 'hidden';
-
-    var width = board.getComputedStyle().width.replaceAll('px','');
-    print(double.parse(width));
-    print(double.parse(width).toInt()/2);
-    board.style.marginLeft = "-${double.parse(width).toInt()/2}px";
-    board.style.visibility = 'visible';*/
-
+    board.style.display = 'block';
   }
 }
 

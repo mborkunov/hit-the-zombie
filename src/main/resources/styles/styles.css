@@ -282,18 +282,12 @@ html, body {
 
 /* line 39, styles.scss */
 body {
-  /*  -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    */
   overflow: hidden;
   -moz-transition: all 1s linear;
   -o-transition: all 1s linear;
   -webkit-transition: all 1s linear;
   transition: all 1s linear;
+  perspective: 800px;
 }
 /* line 54, styles.scss */
 body .market-link {

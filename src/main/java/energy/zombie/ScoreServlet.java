@@ -2,7 +2,6 @@ package energy.zombie;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,7 @@ public class ScoreServlet extends HttpServlet {
     public static final String ACCURACY_PARAM = "accuracy";
     public static final String NAME_PARAM = "name";
     public static final int LIST_MAX_SIZE = 6;
-    public static final int MILLIS_IN_DAY = 7 * 24 * 60 * 60 * 1000;
+    public static final int MILLIS_IN_WEEK = 7 * 24 * 60 * 60 * 1000;
     private static List<Score> list = new ArrayList<Score>();
     private static final Object lock = new Object();
 
@@ -64,7 +63,7 @@ public class ScoreServlet extends HttpServlet {
         synchronized (lock) {
             boolean found = false;
             for (Score score : list) {
-                if (score.getDate().getTime() < System.currentTimeMillis() - MILLIS_IN_DAY) {
+                if (score.getDate().getTime() < System.currentTimeMillis() - MILLIS_IN_WEEK) {
                     list.remove(score);
                 }
             }
