@@ -11,16 +11,17 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
+        <dart.sdk>${env.DART_SDK}</dart.sdk>
     </properties>
 
     <build>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>${project.basedir}/src/main/resources/static/</directory>
                 <filtering>false</filtering>
                 <includes>
-                    <include>scripts/zombie.dart</include>
+                    <include>scripts/*.dart</include>
                     <include>styles/cache.appcache</include>
                     <include>styles/styles.css</include>
                     <include>favicon.ico</include>
@@ -28,6 +29,16 @@
                     <include>images/**/*.*</include>
                     <include>sounds/**/*.ogg</include>
                 </includes>
+                <targetPath>${project.build.directory}/${project.build.finalName}/</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <excludes>
+                    <exclude>static</exclude>
+                </excludes>
             </resource>
         </resources>
         <pluginManagement>
@@ -60,28 +71,20 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.jelastic</groupId>
-                <artifactId>jelastic-maven-plugin</artifactId>
-                <version>1.7</version>
-                <configuration>
-                    <email>${jelastic.email}</email>
-                    <password>${jelastic.password}</password>
-                    <context>zombie</context>
-                    <environment>${jelastic.environment}</environment>
-                    <comment>${jelastic.comment}</comment>
-                    <api_hoster>${jelastic.hoster_api}</api_hoster>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>${project.build.directory}/resources</directory>
+                            <directory>${project.build.directory}/${project.build.finalName}</directory>
+                            <targetPath>/</targetPath>
                         </resource>
+                        <!--<resource>
+                            <directory>${project.basedir}/src/main/webapp/</directory>
+                        </resource>-->
                     </webResources>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <plugin>
@@ -91,16 +94,31 @@
                 <executions>
                     <execution>
                         <id>dart2js</id>
-                        <phase>process-resources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <commandlineArgs>-o ${project.build.directory}/resources/scripts/zombie.js -m ${project.build.directory}/resources/scripts/zombie.dart</commandlineArgs>
-                            <executable>${env.DART_SDK}bin/dart2js</executable>
+                            <commandlineArgs>-o ${project.build.directory}/${project.build.finalName}/scripts/zombie.js
+                                ${project.basedir}/src/main/resources/static/scripts/main.dart</commandlineArgs>
+                            <executable>${dart.sdk}/bin/dart2js</executable>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.11.v20150529</version>
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>src/main/resources/static,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
+                        </baseResource>
+                    </webAppConfig>
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                </configuration>
             </plugin>
         </plugins>
     </build>

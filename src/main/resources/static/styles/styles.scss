@@ -147,8 +147,8 @@ body {
       text-shadow: black 0px 0px 10px;
       z-index: 9;
       position: absolute;
-      top: 5px;
-      left: 15px;
+      top: 15px;
+      left: 300px;
     }
     .timer {
       position: absolute;
@@ -204,7 +204,7 @@ body {
       margin-top: -160px;
       margin-left: -170px;
       width: 300px;
-      height: 60px;
+      height: 90px;
       color: white;
       font: 22px/28px Tahoma;
       z-index: 12;
@@ -248,6 +248,24 @@ body {
         left: 50%;
         margin-left: -20px;
         @include border-radius(2px);
+      }
+    }
+
+    .health {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      .heart {
+        background: url("../images/heart.png") 0 0 no-repeat;
+        background-size: cover;
+        height: 35px;
+        width: 35px;
+        float: left;
+        margin: 0 5px;
+        &.half {
+          background: url("../images/half-heart.png" ) 0 0  no-repeat;
+          background-size: cover;
+        }
       }
     }
 

@@ -6,17 +6,19 @@ public class Score {
 
     private long value;
     private byte accuracy;
+    private int time;
     private String name;
     private Date date;
 
-    public Score(long score, byte accuracy, String name) {
-        this(score, accuracy, name, new Date());
+    public Score(long score, byte accuracy, String name, int time) {
+        this(score, accuracy, name, time, new Date());
     }
 
-    private Score(long score, byte accuracy, String name, Date date) {
+    private Score(long score, byte accuracy, String name, int time, Date date) {
         setValue(score);
         setAccuracy(accuracy);
         setName(name);
+        setTime(time);
         this.date = date;
     }
 
@@ -50,6 +52,14 @@ public class Score {
         this.date = date;
     }
 
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
     public long getValue() {
         return value;
     }
@@ -72,6 +82,6 @@ public class Score {
     }
 
     public String toJSON() {
-        return "{\"accuracy\":" + accuracy + ",\"value\":" + value + ",\"name\":" + Util.escape(name) + "}";
+        return "{\"accuracy\":" + accuracy + ",\"time\":" + time + ",\"value\":" + value + ",\"name\":" + Util.escape(name) + "}";
     }
 }

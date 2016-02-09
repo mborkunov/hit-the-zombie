@@ -12,10 +12,11 @@ public class ScoreServlet extends HttpServlet {
 
     public static final String SCORE_PARAM = "score";
     public static final String ACCURACY_PARAM = "accuracy";
+    public static final String TIME_PARAM = "time";
     public static final String NAME_PARAM = "name";
     public static final int LIST_MAX_SIZE = 6;
     public static final int MILLIS_IN_WEEK = 7 * 24 * 60 * 60 * 1000;
-    private static List<Score> list = new ArrayList<Score>();
+    private static List<Score> list = new ArrayList<>();
     private static final Object lock = new Object();
 
     @Override
@@ -45,15 +46,16 @@ public class ScoreServlet extends HttpServlet {
         try {
             final long score = Long.parseLong(req.getParameter(SCORE_PARAM));
             final byte accuracy = Byte.parseByte(req.getParameter(ACCURACY_PARAM));
+            final int time = Integer.parseInt(req.getParameter(TIME_PARAM));
             final String name = req.getParameter(NAME_PARAM);
-            addScore(score, accuracy, name);
+            addScore(score, accuracy, name, time);
             writeScoreList(resp);
         } catch (IllegalArgumentException ignored) {
             // do nothing. ignore this request
         }
     }
 
-    private void addScore(long value, byte accuracy, String name) {
+    private void addScore(long value, byte accuracy, String name, int time) {
         if (name == null) {
             return;
         }
@@ -71,36 +73,39 @@ public class ScoreServlet extends HttpServlet {
             for (Score score : list) {
                 if (score.getName().equals(name)) {
                     found = true;
-                    if (value > score.getValue() || (value == score.getValue() && accuracy > score.getAccuracy())) {
+                    boolean longerLife = time > score.getTime();
+                    boolean betterScore = value > score.getValue();
+                    boolean betterAccuracy = value == score.getValue() && accuracy > score.getAccuracy();
+                    if (betterScore || betterAccuracy || longerLife) {
                         score.setValue(value);
                         score.setAccuracy(accuracy);
                         score.setDate(new Date());
+                        score.setTime(time);
                     }
                     break;
                 }
             }
             if (!found) {
-                list.add(new Score(value, accuracy, name));
+                list.add(new Score(value, accuracy, name, time));
             }
 
-            Collections.sort(list, new Comparator<Score>() {
-                    @Override
-                    public int compare(Score o1, Score o2) {
-                        if (o1.getValue() == o2.getValue()) {
-                            if (o1.getAccuracy() > o2.getAccuracy()) {
-                                return -1;
-                            } else if (o1.getAccuracy() < o2.getAccuracy()) {
-                                return 1;
-                            } else if (o1.getAccuracy() == o2.getAccuracy()) {
-                                return o1.getDate().compareTo(o2.getDate());
-                            }
-                            return 0;
-                        } else if (o1.getValue() > o2.getValue()) {
-                            return -1;
-                        }
+            Collections.sort(list, (Score o1, Score o2) -> {
+                if (o1.getValue() == o2.getValue()) {
+                    if (o1.getTime() > o2.getTime()) {
+                        return -1;
+                    } else if (o1.getAccuracy() > o2.getAccuracy()) {
+                        return -1;
+                    } else if (o1.getAccuracy() < o2.getAccuracy()) {
                         return 1;
+                    } else if (o1.getAccuracy() == o2.getAccuracy()) {
+                        return o1.getDate().compareTo(o2.getDate());
                     }
+                    return 0;
+                } else if (o1.getValue() > o2.getValue()) {
+                    return -1;
                 }
+                return 1;
+            }
             );
 
 
