@@ -13,6 +13,7 @@ class Game {
 
   static const int ROUND_TIME = 60;
 
+  Timer stopTimer;
   int _score = 0;
   int get score => _score;
   set score(int score) {
@@ -118,10 +119,11 @@ class Game {
       timer = new Timer.periodic(const Duration(milliseconds: 15), update);
     }
 
-    new Timer(const Duration(seconds: ROUND_TIME), stop);
+    stopTimer = new Timer(const Duration(seconds: ROUND_TIME), stop);
   }
 
   void stop() {
+    stopTimer.cancel();
     stopWatch.stop();
     targets.forEach((Target target) => target.stopListening());
     startButton.style.display = 'block';

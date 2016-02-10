@@ -56,7 +56,7 @@ class Health {
     new Timer(const Duration(milliseconds: 1200), () {
       healthContainer.classes.remove(IMMUNE_CLASSNAME);
     });
-    if (_health == 0) {
+    if (health == 0) {
       this.callback();
       this.reset();
     }
