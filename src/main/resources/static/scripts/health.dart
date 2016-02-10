@@ -1,56 +1,73 @@
+import 'dart:async';
 import 'dart:html';
 
 class Health {
-  int value;
+  int _health;
   DivElement healthContainer;
   Function callback;
+  int INITIAL_HEALTH = 10;
 
   Health(DivElement container, void callback()) {
     this.callback = callback;
     healthContainer = new DivElement();
     healthContainer.classes.add("health");
-    reset();
+    _health = INITIAL_HEALTH;
+    render();
     container.children.add(healthContainer);
   }
 
-  draw() {
-    if (healthContainer.children.length > 0) {
-      if (value % 2 == 0) {
-        healthContainer.children.last.classes.add("half");
-      } else {
-        healthContainer.children.last.remove();
+  void render() {
+    healthContainer.children.clear();
+    for (int i = 1; i < health; i++) {
+      if (i % 2 != 0) {
+        DivElement heart = new DivElement();
+        heart.classes.add("heart");
+        healthContainer.children.add(heart);
+      } else if (i + 2 > health) {
+        DivElement heart = new DivElement();
+        heart.classes.add("heart");
+        heart.classes.add("half");
+        healthContainer.children.add(heart);
       }
+    }
+  }
+
+  update() {
+    if (healthContainer.children.isEmpty) return;
+    if (health % 2 == 0) {
+      healthContainer.children.last.remove();
     } else {
-      for (int i = 1; i < value; i++) {
-        if (i % 2 != 0) {
-          DivElement heart = new DivElement();
-          heart.classes.add("heart");
-          healthContainer.children.add(heart);
-        } else if (i + 2 > value) {
-          DivElement heart = new DivElement();
-          heart.classes.add("heart");
-          heart.classes.add("half");
-          healthContainer.children.add(heart);
-        }
-      }
+      healthContainer.children.last.classes.add("half");
     }
   }
 
   reset() {
-    health = 10;
+    health = INITIAL_HEALTH;
+    render();
   }
 
-  void attack() {
-    health = value - 1;
-    if (value == 0) {
+  bool attack() {
+    final IMMUNE_CLASSNAME = "immune";
+    if (healthContainer.classes.contains(IMMUNE_CLASSNAME)) {
+      return false;
+    }
+    health = health - 1;
+    healthContainer.classes.add(IMMUNE_CLASSNAME);
+    new Timer(const Duration(milliseconds: 1200), () {
+      healthContainer.classes.remove(IMMUNE_CLASSNAME);
+    });
+    if (_health == 0) {
       this.callback();
       this.reset();
     }
+    return true;
   }
 
+  get health => _health;
+
   set health(int health) {
-    value = health;
-    draw();
+    _health = health;
+    update();
   }
 
 }

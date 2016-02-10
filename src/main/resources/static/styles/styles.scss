@@ -255,6 +255,14 @@ body {
       position: absolute;
       top: 15px;
       left: 20px;
+      @include keyframes(pulsate) {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      &.immune {
+        @include animation(pulsate 200ms linear infinite alternate);
+      }
+
       .heart {
         background: url("../images/heart.png") 0 0 no-repeat;
         background-size: cover;

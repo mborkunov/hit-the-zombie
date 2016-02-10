@@ -104,6 +104,7 @@ class Game {
   void start() {
     Sound.play('start');
     Stats.reset();
+    health.reset();
     startButton.style.display = 'none';
     overlay.style.display = 'none';
 
@@ -155,6 +156,7 @@ class Game {
       List<Target> active = getActiveTargets();
       if (active.isEmpty) {
         timer.cancel();
+        health.reset();
         this.timer = null;
       } else {
         active.where((Target target) => !target.rotating).toList()

@@ -54,8 +54,9 @@ class Target {
           remainingElement.style.display;
           hideRemaining();
           stopwatch.stop();
-          Sound.play('attack');
-          game.health.attack();
+          if (game.health.attack()) {
+            Sound.play('attack');
+          }
           rotate(1);
         } else {
           String scaleX = (1 - stopwatch.elapsedMilliseconds / TARGET_DELAY).toStringAsFixed(2);
