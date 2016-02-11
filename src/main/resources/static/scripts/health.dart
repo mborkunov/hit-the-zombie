@@ -20,14 +20,14 @@ class Health {
     healthContainer.children.clear();
     for (int i = 1; i < health; i++) {
       if (i % 2 != 0) {
-        DivElement heart = new DivElement();
-        heart.classes.add("heart");
-        healthContainer.children.add(heart);
+        DivElement healthElement = new DivElement();
+        healthElement.classes.add("hp");
+        healthContainer.children.add(healthElement);
       } else if (i + 2 > health) {
-        DivElement heart = new DivElement();
-        heart.classes.add("heart");
-        heart.classes.add("half");
-        healthContainer.children.add(heart);
+        DivElement healthElement = new DivElement();
+        healthElement.classes.add("hp");
+        healthElement.classes.add("half");
+        healthContainer.children.add(healthElement);
       }
     }
   }

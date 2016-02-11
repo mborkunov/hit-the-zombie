@@ -72,6 +72,17 @@ body.zombie {
       color: $color;
     }
 
+    .health {
+      .hp {
+        background: url("../images/zombie/health.png") 0 0 no-repeat;
+        background-size: cover;
+        &.half {
+          background: url("../images/zombie/half-health.png") 0 0  no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+
     .multiplier {
       .text {
         color: $color;

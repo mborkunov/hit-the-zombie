@@ -263,17 +263,11 @@ body {
         @include animation(pulsate 200ms linear infinite alternate);
       }
 
-      .heart {
-        background: url("../images/heart.png") 0 0 no-repeat;
-        background-size: cover;
+      .hp {
         height: 35px;
         width: 35px;
         float: left;
         margin: 0 5px;
-        &.half {
-          background: url("../images/half-heart.png" ) 0 0  no-repeat;
-          background-size: cover;
-        }
       }
     }
 

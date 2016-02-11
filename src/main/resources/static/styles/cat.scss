@@ -73,6 +73,17 @@ body.cat {
       color: $color;
     }
 
+    .health {
+      .hp {
+        background: url("../images/cat/health.png") 0 0 no-repeat;
+        background-size: cover;
+        &.half {
+          background: url("../images/cat/half-health.png") 0 0 no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+
     .multiplier {
       .text {
         color: $color;
