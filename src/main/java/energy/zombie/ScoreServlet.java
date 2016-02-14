@@ -105,9 +105,7 @@ public class ScoreServlet extends HttpServlet {
                     return -1;
                 }
                 return 1;
-            }
-            );
-
+            });
 
             clearList();
         }
